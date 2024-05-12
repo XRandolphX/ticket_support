@@ -11,18 +11,11 @@ return new class extends Migration
      *
      * @return void
      */
-
-
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('priority_ticket', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->nullable();
-            $table->string('email')->unique();
-            $table->string('username')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
+            $table->string('prioridad');
             $table->timestamps();
         });
     }
@@ -34,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('priority_ticket');
     }
 };
