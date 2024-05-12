@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+// Se Cargan los modelos de las tablas que estamos uniendo
+use App\Models\State_Ticket;
+use App\Models\Ticket;
 
 class TicketController extends Controller
 {
@@ -13,7 +16,12 @@ class TicketController extends Controller
      */
     public function index()
     {
-        return view('layouts.ticket-master');
+        $tickets = Ticket::with('setEstadoTicket')->get();
+        $state_ticket = State_Ticket::with('setIdTicket')->get();
+
+        return view('layouts.tabla', compact('tickets','state_ticket'));
+
+        // return view('layouts.tabla');
     }
 
     /**

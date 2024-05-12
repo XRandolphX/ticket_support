@@ -9,6 +9,9 @@ use App\Models\State_Ticket;
 class Ticket extends Model
 {
     use HasFactory;
+
+    protected $table = 'tickets';
+
     protected $fillable = [
         'id',
         'usuario_id',
@@ -19,8 +22,8 @@ class Ticket extends Model
         'estado_id',
     ];
 
-    public function setTicketState()
+    public function setEstadoTicket()
     {
-        return $this->belongsTo(State_Ticket::class);
+        return $this->belongsTo(State_Ticket::class, 'estado_id', 'id');
     }
 }

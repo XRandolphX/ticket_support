@@ -10,13 +10,15 @@ class State_Ticket extends Model
 {
     use HasFactory;
 
+    protected $table = 'state_ticket';
+
     protected $fillable = [
         'id',
         'estado',
     ];
 
-    public function setTicketState()
+    public function setIdTicket()
     {
-        return $this->hasMany(Ticket::class, 'estado_id', 'id');
+        return $this->belongsTo(Ticket::class, 'estado_id', 'id');
     }
 }
