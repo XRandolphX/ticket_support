@@ -13,7 +13,7 @@ class LoginController extends Controller
         if (Auth::check()) {
             return redirect('/home');
         }
-        return view('El usuario y/o contraseña es incorrecto');
+        return view('auth.login');
     }
 
     public function login(LoginRequest $request)
