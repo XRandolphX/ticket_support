@@ -1,4 +1,7 @@
+
+{{-- Acá estoy extendiendo del app-master --}}
 @extends('layouts.app-master')
+
 @section('content')
     <h1>Home</h1>
     @auth

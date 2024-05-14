@@ -6,7 +6,6 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LogoutController;
 use Illuminate\Support\Facades\Route;
-// Prueba 
 use App\Http\Controllers\TicketController;
 /*
 |--------------------------------------------------------------------------
@@ -42,3 +41,6 @@ Route::get('/home', [HomeController::class, 'index']);
 Route::get('/logout', [LogoutController::class, 'logout']);
 
 Route::get('/tickets', [TicketController::class, 'index']);
+
+// Aqui vendra la parte de la tabla para hacer el crud
+Route::get(TicketController)

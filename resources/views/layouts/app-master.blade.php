@@ -10,10 +10,11 @@
 </head>
 
 <body>
-    
+
     @include('layouts.partials.navbar')
 
     <main class="container">
+        {{-- Directiva para reservar espacio al contenido de la vista index --}}
         @yield('content')
     </main>
 

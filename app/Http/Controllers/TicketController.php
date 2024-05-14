@@ -16,12 +16,12 @@ class TicketController extends Controller
      */
     public function index()
     {
-        $tickets = Ticket::with('setEstadoTicket')->get();
-        $state_ticket = State_Ticket::with('setIdTicket')->get();
+        // $tickets = Ticket::with('setEstadoTicket')->get();
+        // $state_ticket = State_Ticket::with('setIdTicket')->get();
 
-        return view('layouts.tabla', compact('tickets','state_ticket'));
-
+        // return view('layouts.tabla', compact('tickets','state_ticket'));
         // return view('layouts.tabla');
+        return view ('ticket.ticket'); 
     }
 
     /**
