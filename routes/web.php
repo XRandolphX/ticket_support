@@ -40,7 +40,5 @@ Route::get('/home', [HomeController::class, 'index']);
 
 Route::get('/logout', [LogoutController::class, 'logout']);
 
-Route::get('/tickets', [TicketController::class, 'index']);
-
 // Aqui vendra la parte de la tabla para hacer el crud
-Route::get(TicketController)
+Route::get('/tickets', [TicketController::class, 'index']);
