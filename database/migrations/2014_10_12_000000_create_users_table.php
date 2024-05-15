@@ -24,6 +24,8 @@ return new class extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
+            $table->integer('department_id');
+            $table->integer('user_status_id');
         });
     }
 

@@ -4,9 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\State_Ticket;
+use App\Models\TicketStatusModel;
 
-class Ticket extends Model
+class TicketModel extends Model
 {
     use HasFactory;
 
@@ -22,8 +22,15 @@ class Ticket extends Model
         'estado_id',
     ];
 
+    // Relaciones foráneas de la tabla Tickets con otras.
+
+    // Uno a muchos 
     public function setEstadoTicket()
     {
-        return $this->belongsTo(State_Ticket::class, 'estado_id', 'id');
+        return $this->belongsTo(TicketStatusModel::class, 'estado_id', 'id');
     }
+
+
+
+    
 }

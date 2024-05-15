@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 // Se Cargan los modelos de las tablas que estamos uniendo
 use App\Models\State_Ticket;
 use App\Models\Ticket;
+use Illuminate\Support\Facades\DB;
 
 class TicketController extends Controller
 {
@@ -14,15 +15,23 @@ class TicketController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    // public function index()
+    // {
+    //     $tickets = Ticket::with('setEstadoTicket')->get();
+    //     $state_ticket = State_Ticket::with('setIdTicket')->get();
+
+    //     return view('layouts.tabla', compact('tickets','state_ticket'));
+    //     return view('layouts.tabla');
+    //     return view ('ticket.ticket'); 
+    // }
+
     public function index()
     {
-        // $tickets = Ticket::with('setEstadoTicket')->get();
-        // $state_ticket = State_Ticket::with('setIdTicket')->get();
-
-        // return view('layouts.tabla', compact('tickets','state_ticket'));
-        // return view('layouts.tabla');
-        return view ('ticket.ticket'); 
+        // variable que obtendrá los datos de la consulta
+        $datos = DB::select(' select * from tickets ');
+        return view('ticket.ticket')->with('datos', $datos,);
     }
+
 
     /**
      * Show the form for creating a new resource.

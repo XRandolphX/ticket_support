@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Ticket;
 
-class State_Ticket extends Model
+class TicketStatusModel extends Model
 {
     use HasFactory;
 
-    protected $table = 'state_ticket';
+    protected $table = 'ticket_status';
 
     protected $fillable = [
         'id',
@@ -19,6 +19,6 @@ class State_Ticket extends Model
 
     public function setIdTicket()
     {
-        return $this->belongsTo(Ticket::class, 'estado_id', 'id');
+        return $this->belongsTo(TicketModel::class, 'estado_id', 'id');
     }
 }

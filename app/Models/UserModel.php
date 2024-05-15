@@ -8,7 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable
+class UserModel extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -47,5 +47,36 @@ class User extends Authenticatable
     public function setPasswordAttribute($value)
     {
         $this->attributes['password'] = bcrypt($value);
+    }
+
+    // Relaciones foráneas de la tabla Users con otras.
+
+    // Muchos a muchos
+    public function user_roles()
+    {
+        return $this->belongsToMany(UserRoleModel::class, 'user_roles');
+    }
+
+    // Uno a muchos
+    public function user_tickets()
+    {
+        return $this->hasMany(TicketModel::class);
+    }
+
+
+
+
+
+    
+    // Muchos a muchos
+    public function user_status()
+    {
+        return $this->belongsToMany(UserStatusModel::class, 'user_status');
+    }
+
+    // Muchos a muchos
+    public function user_department()
+    {
+        return $this->belongsToMany(UserDepartmentModel::class, 'user_department');
     }
 }
