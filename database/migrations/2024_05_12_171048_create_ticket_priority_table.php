@@ -13,9 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('priority_ticket', function (Blueprint $table) {
+        Schema::create('ticket_priority', function (Blueprint $table) {
             $table->id();
-            $table->string('prioridad');
+            $table->string('ticket_priority_name');
             $table->timestamps();
         });
     }

@@ -54,8 +54,12 @@ class UserModel extends Authenticatable
     // Muchos a muchos
     public function user_roles()
     {
-        return $this->belongsToMany(UserRoleModel::class, 'user_roles');
+        return $this->belongsToMany(UserRoleModel::class);
     }
+
+
+
+
 
     // Uno a muchos
     public function user_tickets()
@@ -63,11 +67,6 @@ class UserModel extends Authenticatable
         return $this->hasMany(TicketModel::class);
     }
 
-
-
-
-
-    
     // Muchos a muchos
     public function user_status()
     {

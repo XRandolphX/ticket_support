@@ -17,11 +17,17 @@ return new class extends Migration
             $table->id();
             $table->string('subject');
             $table->string('description');
+
+            $table->integer('user_id');
+
+            $table->unsignedBigInteger('ticket_status_id');
+            $table->foreign('ticket_status_id')->references('id')->on('ticket_status')->onDelete('cascade');
+
+            $table->unsignedBigInteger('ticket_priority_id');
+            $table->foreign('ticket_priority_id')->references('id')->on('ticket_priority')->onDelete('cascade');
+
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable();
-            $table->integer('user_id');
-            $table->integer('ticket_status_id');
-            $table->integer('ticket_priority_id');
         });
     }
 

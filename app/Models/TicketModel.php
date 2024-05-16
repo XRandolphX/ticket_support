@@ -22,7 +22,7 @@ class TicketModel extends Model
     ];
 
     // Relaciones foráneas de la tabla Tickets con otras.
-
+    
     // Uno a muchos 
     public function ticket_status()
     {
