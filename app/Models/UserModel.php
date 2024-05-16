@@ -51,7 +51,7 @@ class UserModel extends Authenticatable
 
     // Relaciones foráneas de la tabla Users con otras.
 
-    // Muchos a muchos
+    // Muchos a muchos - Relación con el modelo Rol de Usuario de la tercera tabla de unión
     public function user_roles()
     {
         return $this->belongsToMany(UserRoleModel::class);
@@ -59,23 +59,4 @@ class UserModel extends Authenticatable
 
 
 
-
-
-    // Uno a muchos
-    public function user_tickets()
-    {
-        return $this->hasMany(TicketModel::class);
-    }
-
-    // Muchos a muchos
-    public function user_status()
-    {
-        return $this->belongsToMany(UserStatusModel::class, 'user_status');
-    }
-
-    // Muchos a muchos
-    public function user_department()
-    {
-        return $this->belongsToMany(UserDepartmentModel::class, 'user_department');
-    }
 }
