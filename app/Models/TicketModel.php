@@ -14,23 +14,18 @@ class TicketModel extends Model
 
     protected $fillable = [
         'id',
-        'usuario_id',
-        'departamento_id',
-        'asunto',
-        'descripcion',
-        'prioridad_id',
-        'estado_id',
+        'subject',
+        'description',
+        'user_id',
+        'ticket_status_id',
+        'ticket_priority_id',
     ];
 
     // Relaciones foráneas de la tabla Tickets con otras.
 
     // Uno a muchos 
-    public function setEstadoTicket()
+    public function ticket_status()
     {
-        return $this->belongsTo(TicketStatusModel::class, 'estado_id', 'id');
+        return $this->belongsTo(TicketStatusModel::class);
     }
-
-
-
-    
 }
