@@ -15,10 +15,12 @@ return new class extends Migration
     {
         Schema::create('tickets', function (Blueprint $table) {
             $table->id();
+            
             $table->string('subject');
             $table->string('description');
 
-            $table->integer('user_id');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
             $table->unsignedBigInteger('ticket_status_id');
             $table->foreign('ticket_status_id')->references('id')->on('ticket_status')->onDelete('cascade');

@@ -13,7 +13,6 @@ class TicketModel extends Model
     protected $table = 'tickets';
 
     protected $fillable = [
-        'id',
         'subject',
         'description',
         'user_id',
@@ -21,11 +20,24 @@ class TicketModel extends Model
         'ticket_priority_id',
     ];
 
-    // Relaciones foráneas de la tabla Tickets con otras.
-    
-    // Uno a muchos 
+    // Relaciones foráneas del Modelo Tickets con otras.
+
+
+    // Uno a muchos - Del modelo Ticket al modelo User.
+    public function ticket_user()
+    {
+        return $this->belongsTo(UserModel::class);
+    }
+
+    // Uno a muchos - Del modelo Ticket al modelo Tickets Status.
     public function ticket_status()
     {
         return $this->belongsTo(TicketStatusModel::class);
+    }
+
+    // Uno a muchos - Del modelo Ticket al modelo Tickets Priority.
+    public function ticket_priority()
+    {
+        return $this->belongsTo(TicketPriorityModel::class);
     }
 }

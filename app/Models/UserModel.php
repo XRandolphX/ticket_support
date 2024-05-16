@@ -57,6 +57,11 @@ class UserModel extends Authenticatable
         return $this->belongsToMany(UserRoleModel::class);
     }
 
+    // Uno a muchos - Del modelo User al modelo Ticket.
+    public function ticket_user()
+    {
+        return $this->hasMany(TicketModel::class);
+    }
 
 
 }

@@ -8,4 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 class TicketPriorityModel extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'id',
+        'ticket_priority_name',
+    ];
+
+    // Relación foránea del Modelo Ticket Priority con Ticket.
+
+    // Uno a muchos - Del modelo Tickets Priority al modelo Ticket.
+    public function priority_ticket()
+    {
+        return $this->hasMany(TicketModel::class, 'ticket_priority_id', 'id');
+    }
 }

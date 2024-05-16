@@ -10,7 +10,7 @@ class TicketStatusModel extends Model
 {
     use HasFactory;
 
-    protected $table = 'ticket_status';
+    // protected $table = 'ticket_status';
 
     protected $fillable = [
         'id',
