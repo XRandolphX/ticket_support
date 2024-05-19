@@ -40,5 +40,7 @@ Route::get('/home', [HomeController::class, 'index']);
 
 Route::get('/logout', [LogoutController::class, 'logout']);
 
-// Aqui vendra la parte de la tabla para hacer el crud
+// CRUD TICKET
 Route::get('/tickets', [TicketController::class, 'index']);
+
+Route::post('/registrar-tickets', [TicketController::class, 'create'])->name('create-ticket');

@@ -16,7 +16,8 @@ return new class extends Migration
         Schema::create('user_department', function (Blueprint $table) {
             $table->id();
             $table->string('department');
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->nullable();
         });
     }
 

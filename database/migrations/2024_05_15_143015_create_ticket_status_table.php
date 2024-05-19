@@ -16,7 +16,8 @@ return new class extends Migration
         Schema::create('ticket_status', function (Blueprint $table) {
             $table->id();
             $table->string('ticket_status_name');
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->nullable();
         });
     }
 
