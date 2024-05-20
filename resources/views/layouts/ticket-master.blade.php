@@ -10,9 +10,12 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/10363b534a.js" crossorigin="anonymous"></script>
+
+    <link href="{{ asset('assets/css/ticket.css') }}" rel="stylesheet">
+
 </head>
 
-<body>
+<body class="dark-theme">
     <main class="container">
         {{-- Directiva para reservar espacio al contenido de la vista Ticket --}}
         @yield('content')
@@ -29,6 +32,13 @@
                 document.getElementById('prioridad-input').value = prioridad;
             });
         });
+    </script>
+
+    <script>
+        function toggleTheme() {
+            document.body.classList.toggle('light-theme');
+            document.body.classList.toggle('dark-theme');
+        }
     </script>
 
 </body>

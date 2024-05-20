@@ -3,7 +3,40 @@
 
 @section('content')
     <h1 class="text-center p-3">Generar ticket</h1>
-
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-sm-6 col-md-4">
+                <div class="info-box">
+                    <div class="icon">📷</div>
+                    <h2>Learn & Discover</h2>
+                    <p>Want to upgrade your skills and get noticed? Participating in CodePen Challenges is a great way to
+                        try something new. We frequently feature these Pens on our homepage and across social media!</p>
+                    <button>Join this Week’s Challenge</button>
+                    <button class="theme-button" onclick="toggleTheme()">Toggle Theme</button>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col-md-4">
+                <div class="info-box">
+                    <div class="icon">📷</div>
+                    <h2>Learn & Discover</h2>
+                    <p>Want to upgrade your skills and get noticed? Participating in CodePen Challenges is a great way to
+                        try something new. We frequently feature these Pens on our homepage and across social media!</p>
+                    <button>Join this Week’s Challenge</button>
+                    <button class="theme-button" onclick="toggleTheme()">Toggle Theme</button>
+                </div>
+            </div>
+            <div class="col-12 col-sm-6 col-md-4">
+                <div class="info-box">
+                    <div class="icon">📷</div>
+                    <h2>Learn & Discover</h2>
+                    <p>Want to upgrade your skills and get noticed? Participating in CodePen Challenges is a great way to
+                        try something new. We frequently feature these Pens on our homepage and across social media!</p>
+                    <button>Join this Week’s Challenge</button>
+                    <button class="theme-button" onclick="toggleTheme()">Toggle Theme</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- Modal Registrar Datos-->
     <div class="modal fade" id="modalRegistrar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
