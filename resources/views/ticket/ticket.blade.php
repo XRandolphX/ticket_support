@@ -7,69 +7,65 @@
         <div class="row">
             <div class="col-12 col-sm-6 col-md-4">
                 <div class="info-box">
-                    <div class="icon">📷</div>
-                    <h2>Learn & Discover</h2>
-                    <p>Want to upgrade your skills and get noticed? Participating in CodePen Challenges is a great way to
-                        try something new. We frequently feature these Pens on our homepage and across social media!</p>
-                    <button>Join this Week’s Challenge</button>
-                    <button class="theme-button" onclick="toggleTheme()">Toggle Theme</button>
+                    <div class="icon"><i class="fa-solid fa-ticket"></i></div>
+                    <h2>Crear Ticket de Mantenimiento</h2>
+                    <p>Aquí puede crear su ticket de sporte técnico de manera fácil y rápida 😊</p>
+                    <button type="button" data-bs-toggle="modal" data-bs-target="#modalRegistrar">Crear Ticket</button>
                 </div>
             </div>
             <div class="col-12 col-sm-6 col-md-4">
                 <div class="info-box">
-                    <div class="icon">📷</div>
-                    <h2>Learn & Discover</h2>
-                    <p>Want to upgrade your skills and get noticed? Participating in CodePen Challenges is a great way to
-                        try something new. We frequently feature these Pens on our homepage and across social media!</p>
-                    <button>Join this Week’s Challenge</button>
-                    <button class="theme-button" onclick="toggleTheme()">Toggle Theme</button>
+                    <div class="icon"><i class="fa-solid fa-eye"></i></div>
+                    <h2>Consultar estado del Ticket</h2>
+                    <p>En este apartado usted puede consultar el estado del ticket. Se cuenta con 4 estados: Recibido,
+                        Tramitado, Observado, Archivado 😊</p>
+                    <a href="{{ url('/seguimiento') }}" class="btn-theme">Consultar</a>
                 </div>
             </div>
             <div class="col-12 col-sm-6 col-md-4">
                 <div class="info-box">
-                    <div class="icon">📷</div>
-                    <h2>Learn & Discover</h2>
-                    <p>Want to upgrade your skills and get noticed? Participating in CodePen Challenges is a great way to
-                        try something new. We frequently feature these Pens on our homepage and across social media!</p>
-                    <button>Join this Week’s Challenge</button>
-                    <button class="theme-button" onclick="toggleTheme()">Toggle Theme</button>
+                    <div class="icon"><i class="fa-solid fa-file-export"></i></div>
+                    <h2>Admin</h2>
+                    <p>Aquí puede generar los reportes y consultar dato Administrativos</p>
+                    <a href="{{ url('/admin-view') }}" class="btn-theme">Ver Información</a>
                 </div>
             </div>
         </div>
     </div>
-    <!-- Modal Registrar Datos-->
+    <!-- Modal Registrar Datos -->
     <div class="modal fade" id="modalRegistrar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Registrar Ticket</h1>
+                    <h5 class="modal-title" id="exampleModalLabel">Crear Nuevo Ticket</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form action="{{ route('create-ticket') }}" method="POST">
                         @csrf
                         <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">Asunto</label>
-                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                                name="txtasunto">
-                        </div>
-                        <div class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                                aria-expanded="false">
-                                Prioridad
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <li><a class="dropdown-item" data-value="Emergencia" href="#">Emergencia</a></li>
-                                <li><a class="dropdown-item" data-value="Alta" href="#">Alta</a></li>
-                                <li><a class="dropdown-item" data-value="Normal" href="#">Normal</a></li>
-                                <li><a class="dropdown-item" data-value="Baja" href="#">Baja</a></li>
-                            </ul>
-                            <input type="hidden" name="prioridad" id="prioridad-input">
+                            <label for="prioridad" class="form-label">Prioridad</label>
+                            <div class="dropdown">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" id="prioridadDropdown"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    Seleccionar Prioridad
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="prioridadDropdown">
+                                    <li><a class="dropdown-item" data-value="Emergencia" href="#">Emergencia</a></li>
+                                    <li><a class="dropdown-item" data-value="Alta" href="#">Alta</a></li>
+                                    <li><a class="dropdown-item" data-value="Normal" href="#">Normal</a></li>
+                                    <li><a class="dropdown-item" data-value="Baja" href="#">Baja</a></li>
+                                </ul>
+                                <input type="hidden" name="prioridad" id="prioridad-input">
+                            </div>
                         </div>
                         <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label">Descripción</label>
-                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
-                                name="txtdescripcion">
+                            <label for="asunto" class="form-label">Asunto</label>
+                            <input type="text" class="form-control" id="asunto" name="txtasunto" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="descripcion" class="form-label">Descripción</label>
+                            <textarea class="form-control" id="descripcion" name="txtdescripcion" rows="3" required></textarea>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
@@ -79,92 +75,5 @@
                 </div>
             </div>
         </div>
-    </div>
-
-    <div class="p-4 table-responsive">
-        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalRegistrar">Registrar
-            Ticket</button>
-        <table class="table table-striped table-bordered table-hover">
-            <thead class="bg-primary text-white">
-                <tr>
-                    <th scope="col">#Ticket ID</th>
-                    <th scope="col">Asunto</th>
-                    <th scope="col">Descripción</th>
-                    <th scope="col">Usuario</th>
-                    <th scope="col">Estado</th>
-                    <th scope="col">Prioridad</th>
-                    <th scope="col">Fecha de creación</th>
-                    <th scope="col">Fecha de actualización</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody class="table-group-divider">
-                @foreach ($datos as $item)
-                    <tr>
-                        <th>{{ $item->id }}</th>
-                        <td>{{ $item->subject }}</td>
-                        <td>{{ $item->description }}</td>
-                        <td>{{ $item->user_id }}</td>
-                        <td>{{ $item->ticket_status_id }}</td>
-                        <td>{{ $item->ticket_priority_id }}</td>
-                        <td>{{ $item->created_at }}</td>
-                        <td>{{ $item->updated_at }}</td>
-                        <td>
-                            <a href="" data-bs-toggle="modal" data-bs-target="#modalEditar"
-                                class="btn btn-warning btn-sm"><i class="fa-solid fa-pen-to-square"></i></a>
-                            <a href="" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i></a>
-                        </td>
-
-                        <!-- Modal Modificar Datos-->
-                        <div class="modal fade" id="modalEditar" tabindex="-1" aria-labelledby="exampleModalLabel"
-                            aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Modificar Ticket</h1>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <form>
-                                            <div class="mb-3">
-                                                <label for="exampleInputEmail1" class="form-label">Asunto</label>
-                                                <input type="text" class="form-control" id="exampleInputEmail1"
-                                                    aria-describedby="emailHelp" name="txtcodigo">
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="exampleInputEmail1" class="form-label">Descripción</label>
-                                                <input type="text" class="form-control" id="exampleInputEmail1"
-                                                    aria-describedby="emailHelp" name="txtcodigo">
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="exampleInputEmail1" class="form-label">Usuario</label>
-                                                <input type="text" class="form-control" id="exampleInputEmail1"
-                                                    aria-describedby="emailHelp" name="txtcodigo">
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="exampleInputEmail1" class="form-label">Estado</label>
-                                                <input type="text" class="form-control" id="exampleInputEmail1"
-                                                    aria-describedby="emailHelp" name="txtcodigo">
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="exampleInputEmail1" class="form-label">Prioridad</label>
-                                                <input type="text" class="form-control" id="exampleInputEmail1"
-                                                    aria-describedby="emailHelp" name="txtcodigo">
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary"
-                                                    data-bs-dismiss="modal">Cerrar</button>
-                                                <button type="submit" class="btn btn-primary">Modificar</button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
     </div>
 @endsection

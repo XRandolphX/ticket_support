@@ -26,10 +26,10 @@ return new class extends Migration
             $table->timestamps();
 
             $table->unsignedBigInteger('user_department_id');
-            $table->foreign('user_department_id')->references('id')->on('user_department')->onDelete('cascade');
+            $table->foreign('user_department_id')->references('id')->on('user_department');
             
-            $table->unsignedBigInteger('user_status_id');
-            $table->foreign('user_status_id')->references('id')->on('user_status')->onDelete('cascade');
+            $table->unsignedBigInteger('user_status_id')->default(1); // Asume que 1 es el ID del estado "activo"
+            $table->foreign('user_status_id')->references('id')->on('user_status');
         });
     }
 

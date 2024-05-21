@@ -1,10 +1,11 @@
 <?php
 
-
+use App\Http\Controllers\AdminViewController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LogoutController;
+use App\Http\Controllers\SeguimientoController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TicketController;
 /*
@@ -44,3 +45,9 @@ Route::get('/logout', [LogoutController::class, 'logout']);
 Route::get('/tickets', [TicketController::class, 'index']);
 
 Route::post('/registrar-tickets', [TicketController::class, 'create'])->name('create-ticket');
+
+// Seguimiento
+Route::get('/seguimiento', [SeguimientoController::class, 'index']);
+
+// Admin
+Route::get('/admin-view', [AdminViewController::class, 'index']);

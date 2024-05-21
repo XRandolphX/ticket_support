@@ -4,11 +4,11 @@
 <div class="container">
     <div class="row">
         <div class="col-sm-6">
-            <!-- Aquí puedes poner el logo de tu empresa -->
+            <!-- Logo -->
             <img src="assets/img/ugel_logo_nobg.png" alt="Logo de la empresa">
         </div>
         <div class="col-sm-6">
-            <!-- Aquí va el formulario de inicio de sesión -->
+            <!-- Formulario de inicio de sesión -->
             <form action="/login" method="POST">
                 @csrf
                 <h1>Login</h1>

@@ -27,9 +27,8 @@ class TicketController extends Controller
 
     public function index()
     {
-        // variable que obtendrá los datos de la consulta
-        $datos = DB::select(' select * from tickets ');
-        return view('ticket.ticket')->with('datos', $datos,);
+
+        return view('ticket.ticket');
     }
 
 

@@ -15,7 +15,7 @@
 
 </head>
 
-<body class="dark-theme">
+<body class="light-theme">
     <main class="container">
         {{-- Directiva para reservar espacio al contenido de la vista Ticket --}}
         @yield('content')
@@ -25,22 +25,10 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
     </script>
 
-    <script>
-        document.querySelectorAll('.dropdown-item').forEach(item => {
-            item.addEventListener('click', function() {
-                let prioridad = this.getAttribute('data-value');
-                document.getElementById('prioridad-input').value = prioridad;
-            });
-        });
-    </script>
-
-    <script>
-        function toggleTheme() {
-            document.body.classList.toggle('light-theme');
-            document.body.classList.toggle('dark-theme');
-        }
-    </script>
-
+    <!-- Botón flotante -->
+    <button class="floating-button" onclick="toggleTheme()"><i id="theme-icon" class="fa-solid fa-moon"></i></button>
+    <!-- JS de la Interfaz Ticket -->
+    <script src="assets/js/ticket.js"></script>
 </body>
 
 </html>
