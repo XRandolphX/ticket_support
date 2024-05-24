@@ -23,6 +23,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/home', [HomeController::class, 'index']);
+
+Route::get('/logout', [LogoutController::class, 'logout']);
+
+// Direccionamiento de Registrar Usuario
 Route::get('/register', [RegisterController::class, 'show']);
 
 Route::post(
@@ -30,6 +35,7 @@ Route::post(
     [RegisterController::class, 'register']
 );
 
+// Routes de Login 
 Route::get('/login', [LoginController::class, 'show']);
 
 Route::post(
@@ -37,9 +43,8 @@ Route::post(
     [LoginController::class, 'login']
 );
 
-Route::get('/home', [HomeController::class, 'index']);
 
-Route::get('/logout', [LogoutController::class, 'logout']);
+
 
 // CRUD TICKET
 Route::get('/tickets', [TicketController::class, 'index']);
