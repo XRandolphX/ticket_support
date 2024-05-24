@@ -27,10 +27,10 @@
                 </div>
 
                 <div class="form-floating mb-3">
-                    <select class="selectpicker" data-live-search="true">
+                    <select class="selectpicker" data-live-search="true" name="user_department_id">
                         <option selected disabled data-tokens="Action">Seleccionar Área</option>
                         @foreach ($datos_area as $item)
-                            <option value="{{ $item }}">{{ $item }}</option>
+                            <option value="{{ $item->id }}">{{ $item->department }}</option>
                         @endforeach
                     </select>
                 </div>

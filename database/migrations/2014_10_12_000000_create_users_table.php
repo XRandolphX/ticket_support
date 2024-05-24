@@ -23,11 +23,12 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->nullable();
 
             $table->unsignedBigInteger('user_department_id');
             $table->foreign('user_department_id')->references('id')->on('user_department');
-            
+
             $table->unsignedBigInteger('user_status_id')->default(1); // Asume que 1 es el ID del estado "activo"
             $table->foreign('user_status_id')->references('id')->on('user_status');
         });

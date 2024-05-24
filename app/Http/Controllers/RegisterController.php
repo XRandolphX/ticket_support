@@ -18,7 +18,8 @@ class RegisterController extends Controller
         if (Auth::check()) {
             return redirect('/home');
         }
-        $datos_area = DB::table('user_department')->pluck('department');
+        // $datos_area = DB::table('user_department')->pluck('department');
+        $datos_area = DB::table('user_department')->select('id', 'department')->get();
 
         // Log en la consola
         Log::info('Datos del área: ', $datos_area->toArray());
@@ -28,7 +29,9 @@ class RegisterController extends Controller
     //Crea el usuario y no permite que se repita el nombre de usuario y correo.
     public function register(RegisterRequest $request)
     {
+        dd($request->all()); // Imprime todos los datos del formulario
         $user = UserModel::create($request->validated());
+        auth()->login($user);
         return redirect('/login')->with('success', 'Cuenta creada satisfactoriamente');
     }
 }

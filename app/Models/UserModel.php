@@ -17,6 +17,9 @@ class UserModel extends Authenticatable
      *
      * @var array<int, string>
      */
+
+    protected $table = 'users';
+
     protected $fillable = [
         'name',
         'email',
@@ -64,6 +67,4 @@ class UserModel extends Authenticatable
     {
         return $this->hasMany(TicketModel::class);
     }
-
-
 }
