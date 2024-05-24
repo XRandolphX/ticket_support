@@ -26,9 +26,9 @@ class TicketRegisterRequest extends FormRequest
         return [
             'subject' => 'required',
             'description' => 'required',
-            'user_id' => 'required',
-            'ticket_status_id' => 'required',
-            'ticket_priority_id' => 'required',
+            'user_id' => 'required|exists:users,id',
+            'ticket_status_id' => 'required|exists:ticket_status,id',
+            'ticket_priority_id' => 'required|exists:ticket_priority,id',
         ];
     }
 }

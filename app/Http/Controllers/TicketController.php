@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TicketRegisterRequest;
 use Illuminate\Http\Request;
 // Se Cargan los modelos de las tablas que estamos uniendo
 use App\Models\State_Ticket;
 use App\Models\Ticket;
+use App\Models\TicketModel;
 use Illuminate\Support\Facades\DB;
 
 class TicketController extends Controller
@@ -27,8 +29,8 @@ class TicketController extends Controller
 
     public function index()
     {
-
-        return view('ticket.ticket');
+        $datos_prioridad = DB::table('ticket_priority')->select('id', 'ticket_priority_name')->get();
+        return view('ticket.ticket')->with('datos_prioridad', $datos_prioridad);
     }
 
 
@@ -37,11 +39,10 @@ class TicketController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create(TicketRegisterRequest $request)
     {
-        return $request->txtasunto;
-        return $request->prioridad;
-        return $request->txtdescripcion;
+        // $ticket = TicketModel::create($request);
+        // return redirect('/');
     }
 
     /**

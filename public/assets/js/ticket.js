@@ -1,9 +1,9 @@
-document.querySelectorAll(".dropdown-item").forEach((item) => {
-    item.addEventListener("click", function () {
-        let prioridad = this.getAttribute("data-value");
-        document.getElementById("prioridad-input").value = prioridad;
-    });
-});
+// document.querySelectorAll(".dropdown-item").forEach((item) => {
+//     item.addEventListener("click", function () {
+//         let prioridad = this.getAttribute("data-value");
+//         document.getElementById("prioridad-input").value = prioridad;
+//     });
+// });
 
 function toggleTheme() {
     let body = document.body;

@@ -43,20 +43,16 @@
                 <div class="modal-body">
                     <form action="{{ route('create-ticket') }}" method="POST">
                         @csrf
+                        {{-- Dropdown Prioridad --}}
                         <div class="mb-3">
                             <label for="prioridad" class="form-label">Prioridad</label>
                             <div class="dropdown">
-                                <button class="btn btn-secondary dropdown-toggle" type="button" id="prioridadDropdown"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                    Seleccionar Prioridad
-                                </button>
-                                <ul class="dropdown-menu" aria-labelledby="prioridadDropdown">
-                                    <li><a class="dropdown-item" data-value="Emergencia" href="#">Emergencia</a></li>
-                                    <li><a class="dropdown-item" data-value="Alta" href="#">Alta</a></li>
-                                    <li><a class="dropdown-item" data-value="Normal" href="#">Normal</a></li>
-                                    <li><a class="dropdown-item" data-value="Baja" href="#">Baja</a></li>
-                                </ul>
-                                <input type="hidden" name="prioridad" id="prioridad-input">
+                                <select class="selectpicker" data-live-search="true" name="ticket_priority_id">
+                                    <option selected disabled data-tokens="Action">Seleccionar Prioridad</option>
+                                    @foreach ($datos_prioridad as $item)
+                                        <option value="{{ $item->id }}">{{ $item->ticket_priority_name }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
                         <div class="mb-3">
