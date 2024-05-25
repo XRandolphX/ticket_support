@@ -23,6 +23,10 @@
         {{-- Directiva para reservar espacio al contenido de la vista Ticket --}}
         @yield('content')
     </main>
+
+    <!-- 1) jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
     {{-- Bundle Bootstrap --}}
     <script src="{{ url('assets/js/bootstrap.bundle.min.js') }}"></script>
 

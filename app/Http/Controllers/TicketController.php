@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\State_Ticket;
 use App\Models\Ticket;
 use App\Models\TicketModel;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class TicketController extends Controller
@@ -27,8 +28,11 @@ class TicketController extends Controller
     //     return view ('ticket.ticket'); 
     // }
 
-    public function index()
+    public function show()
     {
+        if (Auth::check()) {
+            return redirect('/home');
+        }
         $datos_prioridad = DB::table('ticket_priority')->select('id', 'ticket_priority_name')->get();
         return view('ticket.ticket')->with('datos_prioridad', $datos_prioridad);
     }
@@ -41,8 +45,30 @@ class TicketController extends Controller
      */
     public function create(TicketRegisterRequest $request)
     {
-        // $ticket = TicketModel::create($request);
-        // return redirect('/');
+
+        // dd($request->all()); // Imprime todos los datos del formulario
+
+        // Primero, validamos los datos del formulario
+        $validated = $request->validated();
+
+        // Luego, creamos una nueva instancia de Ticket
+        $ticket = new TicketModel;
+
+        // Asignamos los valores a las propiedades del ticket
+        $ticket->subject = $validated['subject'];
+        $ticket->description = $validated['description'];
+        // $ticket->user_id = $validated['user_id'];
+        // $ticket->ticket_status_id = $validated['ticket_status_id'];
+        $ticket->ticket_priority_id = $validated['ticket_priority_id'];
+
+        $ticket->user_id = auth()->user()->id; // Aquí se asigna el id del usuario autenticado
+
+
+        // Guardamos el ticket en la base de datos
+        $ticket->save();
+
+        // Redirigimos al usuario a la página de agradecimiento o a la lista de tickets
+        // return redirect()->route('seguimiento.seguimiento');
     }
 
     /**
@@ -62,10 +88,7 @@ class TicketController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        //
-    }
+
 
     /**
      * Show the form for editing the specified resource.

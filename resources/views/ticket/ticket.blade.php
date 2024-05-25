@@ -1,4 +1,3 @@
-{{-- En esta vista estoy heredando la plantilla de diseño ticket-master --}}
 @extends('layouts.ticket-master')
 
 @section('content')
@@ -45,23 +44,27 @@
                         @csrf
                         {{-- Dropdown Prioridad --}}
                         <div class="mb-3">
-                            <label for="prioridad" class="form-label">Prioridad</label>
-                            <div class="dropdown">
-                                <select class="selectpicker" data-live-search="true" name="ticket_priority_id">
-                                    <option selected disabled data-tokens="Action">Seleccionar Prioridad</option>
-                                    @foreach ($datos_prioridad as $item)
-                                        <option value="{{ $item->id }}">{{ $item->ticket_priority_name }}</option>
-                                    @endforeach
-                                </select>
+                            <div class="col-sm-5">
+                                <div class="row">
+                                    <label for="prioridad" class="form-label">Prioridad</label>
+                                </div>
+                                <div class="row">
+                                    <select class="selectpicker" data-live-search="true" name="ticket_priority_id">
+                                        <option selected disabled data-tokens="Action">Seleccionar Prioridad</option>
+                                        @foreach ($datos_prioridad as $item)
+                                            <option value="{{ $item->id }}">{{ $item->ticket_priority_name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                             </div>
                         </div>
                         <div class="mb-3">
                             <label for="asunto" class="form-label">Asunto</label>
-                            <input type="text" class="form-control" id="asunto" name="txtasunto" required>
+                            <input type="text" class="form-control" id="asunto" name="subject" required>
                         </div>
                         <div class="mb-3">
                             <label for="descripcion" class="form-label">Descripción</label>
-                            <textarea class="form-control" id="descripcion" name="txtdescripcion" rows="3" required></textarea>
+                            <textarea class="form-control" id="descripcion" name="description" rows="3" required></textarea>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>

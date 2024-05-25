@@ -19,21 +19,13 @@ use App\Http\Controllers\TicketController;
 |
 */
 
+// Lo primero que se va a mostrar, en este caso es lo de laravel
 Route::get('/', function () {
     return view('welcome');
 });
 
+// Navegar a la vista principal
 Route::get('/home', [HomeController::class, 'index']);
-
-Route::get('/logout', [LogoutController::class, 'logout']);
-
-// Direccionamiento de Registrar Usuario
-Route::get('/register', [RegisterController::class, 'show']);
-
-Route::post(
-    '/register',
-    [RegisterController::class, 'register']
-);
 
 // Routes de Login 
 Route::get('/login', [LoginController::class, 'show']);
@@ -43,13 +35,21 @@ Route::post(
     [LoginController::class, 'login']
 );
 
+// Cerrar Sesión
+Route::get('/logout', [LogoutController::class, 'logout']);
 
+// Routes de Registro de Usuario
+Route::get('/register', [RegisterController::class, 'show']);
 
+Route::post(
+    '/register',
+    [RegisterController::class, 'register']
+);
 
-// CRUD TICKET
-Route::get('/tickets', [TicketController::class, 'index']);
-
+// CRUD TICKET - lo que se puede ir 
+Route::get('/tickets', [TicketController::class, 'show']);
 Route::post('/registrar-tickets', [TicketController::class, 'create'])->name('create-ticket');
+
 
 // Seguimiento
 Route::get('/seguimiento', [SeguimientoController::class, 'index']);
