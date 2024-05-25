@@ -25,7 +25,7 @@ Route::get('/', function () {
 });
 
 // Navegar a la vista principal
-Route::get('/home', [HomeController::class, 'index']);
+Route::get('/home', [HomeController::class, 'index'])->middleware('auth');
 
 // Routes de Login 
 Route::get('/login', [LoginController::class, 'show']);
