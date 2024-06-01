@@ -17,15 +17,11 @@
 </head>
 
 <body class="light-theme">
+    @include('layouts.partials.navbar')
 
-
-
-    <main class="container">
-        @include('layouts.partials.navbar')
-        {{-- Directiva para reservar espacio al contenido de la vista Principal --}}
+    <main class="main-container">
         @yield('content')
     </main>
-
 
     <!-- 1) jQuery -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>

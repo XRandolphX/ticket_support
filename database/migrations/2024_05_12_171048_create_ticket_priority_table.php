@@ -22,7 +22,7 @@ return new class extends Migration
         });
 
         // Inserta los datos iniciales
-        DB::table('user_department')->insert([
+        DB::table('ticket_priority')->insert([
             ['ticket_priority_name' => 'Emergencia'],
             ['ticket_priority_name' => 'Alta'],
             ['ticket_priority_name' => 'Normal'],

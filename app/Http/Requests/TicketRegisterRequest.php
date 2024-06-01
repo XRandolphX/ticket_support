@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\TicketModel;
 use Illuminate\Foundation\Http\FormRequest;
 
 class TicketRegisterRequest extends FormRequest
@@ -13,7 +14,8 @@ class TicketRegisterRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
+        // return $this->user()->can('create', TicketModel::class);
     }
 
     /**
@@ -26,8 +28,6 @@ class TicketRegisterRequest extends FormRequest
         return [
             'subject' => 'required',
             'description' => 'required',
-            'user_id' => 'required|exists:users,id',
-            'ticket_status_id' => 'required|exists:ticket_status,id',
             'ticket_priority_id' => 'required|exists:ticket_priority,id',
         ];
     }

@@ -25,7 +25,7 @@ Route::get('/', function () {
 });
 
 // Navegar a la vista principal
-Route::get('/home', [HomeController::class, 'index'])->middleware('auth');
+Route::get('/home', [HomeController::class, 'index']);
 
 // Routes de Login 
 Route::get('/login', [LoginController::class, 'show']);
@@ -46,9 +46,9 @@ Route::post(
     [RegisterController::class, 'register']
 );
 
-// CRUD TICKET - lo que se puede ir 
+// CRUD TICKET
 Route::get('/tickets', [TicketController::class, 'show']);
-Route::post('/registrar-tickets', [TicketController::class, 'create'])->name('create-ticket');
+Route::post('/registrar-tickets', [TicketController::class, 'store'])->name('registrar-tickets');
 
 
 // Seguimiento

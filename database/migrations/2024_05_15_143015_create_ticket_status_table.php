@@ -22,7 +22,7 @@ return new class extends Migration
         });
 
         // Inserta los datos iniciales
-        DB::table('user_department')->insert([
+        DB::table('ticket_status')->insert([
             ['ticket_status_name' => 'Abierto'],
             ['ticket_status_name' => 'Cerrado'],
         ]);

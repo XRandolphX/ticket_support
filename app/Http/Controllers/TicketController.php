@@ -43,32 +43,29 @@ class TicketController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(TicketRegisterRequest $request)
+    public function store(TicketRegisterRequest $request)
     {
-
-        // dd($request->all()); // Imprime todos los datos del formulario
 
         // Primero, validamos los datos del formulario
         $validated = $request->validated();
 
-        // Luego, creamos una nueva instancia de Ticket
-        $ticket = new TicketModel;
+        // Luego, creamos una nueva instancia de TicketModel
+        $ticket = new TicketModel($validated);
+        // dd($ticket);
 
-        // Asignamos los valores a las propiedades del ticket
-        $ticket->subject = $validated['subject'];
-        $ticket->description = $validated['description'];
-        // $ticket->user_id = $validated['user_id'];
-        // $ticket->ticket_status_id = $validated['ticket_status_id'];
-        $ticket->ticket_priority_id = $validated['ticket_priority_id'];
+        // Asignamos el user_id al usuario autenticado y el ticket_status_id a un valor predeterminado
+        $ticket->user_id = auth()->id();
+        $ticket->ticket_status_id = 1; // id predeterminado 1 ("Abierto")
 
-        $ticket->user_id = auth()->user()->id; // Aquí se asigna el id del usuario autenticado
-
-
-        // Guardamos el ticket en la base de datos
-        $ticket->save();
-
-        // Redirigimos al usuario a la página de agradecimiento o a la lista de tickets
-        // return redirect()->route('seguimiento.seguimiento');
+        // Intentamos guardar el ticket en la base de datos
+        if ($ticket->save()) {
+            // El ticket se guardó correctamente
+            // Redirigir al usuario a una página de éxito
+            return redirect('/seguimiento')->with('status', 'Ticket registrado con éxito!');
+        } else {
+            // Hubo un problema al guardar el ticket
+            return back()->with('error', 'Hubo un problema al registrar el ticket.');
+        }
     }
 
     /**
@@ -77,10 +74,10 @@ class TicketController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
-    }
+    // public function store(Request $request)
+    // {
+    //     //
+    // }
 
     /**
      * Display the specified resource.
