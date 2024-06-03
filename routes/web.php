@@ -34,13 +34,11 @@ Route::post(
     '/login',
     [LoginController::class, 'login']
 );
-
 // Cerrar Sesión
 Route::get('/logout', [LogoutController::class, 'logout']);
 
 // Routes de Registro de Usuario
 Route::get('/register', [RegisterController::class, 'show']);
-
 Route::post(
     '/register',
     [RegisterController::class, 'register']
@@ -49,7 +47,6 @@ Route::post(
 // CRUD TICKET
 Route::get('/tickets', [TicketController::class, 'show']);
 Route::post('/registrar-tickets', [TicketController::class, 'store'])->name('registrar-tickets');
-
 
 // Seguimiento
 Route::get('/seguimiento', [SeguimientoController::class, 'index']);
