@@ -27,9 +27,10 @@ Route::get('/', function () {
 // Navegar a la vista principal
 Route::get('/home', [HomeController::class, 'index']);
 
-// Routes de Login 
+// ROUTES DE LOGIN
+// Mostrar la Interfaz Login
 Route::get('/login', [LoginController::class, 'show']);
-
+// Validar e Ingresar
 Route::post(
     '/login',
     [LoginController::class, 'login']

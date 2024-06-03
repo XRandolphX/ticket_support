@@ -12,6 +12,8 @@ class LoginRequest extends FormRequest
      *
      * @return bool
      */
+
+    // Cualquier usuario puede hacer esta solicitud "true".
     public function authorize()
     {
         return true;
@@ -22,6 +24,8 @@ class LoginRequest extends FormRequest
      *
      * @return array<string, mixed>
      */
+
+    // Reglas de validación.
     public function rules()
     {
         return [
@@ -30,6 +34,7 @@ class LoginRequest extends FormRequest
         ];
     }
 
+    // Recupera las credenciales de la solicitud del usuario y retorna según las credenciales.
     public function getCredentials()
     {
         $username = $this->get('username');
@@ -39,7 +44,7 @@ class LoginRequest extends FormRequest
         }
         return $this->only('username', 'password');
     }
-
+    // Verifica si el valor dado es un correo electrónico.
     public function isEmail($value)
     {
         $factory = $this->container->make(ValidationFactory::class);

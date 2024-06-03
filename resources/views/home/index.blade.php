@@ -8,7 +8,7 @@
         <div class="container">
             <h4 class="alert-heading">¡Bienvenido, <strong>{{ auth()->user()->name ?? auth()->user()->username }}</strong>!</h4>
             <p>Estás autenticado en la página.</p>
-            <h3 class="text-center p-3">Opciones</h3>
+            <h3 class="text-center p-3 display-6">Opciones</h3>
             <div class="row">
                 <div class="col-12 col-sm-6 col-md-4">
                     <div class="info-box">
@@ -22,8 +22,7 @@
                     <div class="info-box">
                         <div class="icon"><i class="fa-solid fa-eye"></i></div>
                         <h2>Consultar estado del Ticket</h2>
-                        <p>En este apartado usted puede consultar el estado del ticket. Se cuenta con 4 estados: Recibido,
-                            Tramitado, Observado, Archivado 😊</p>
+                        <p>En este apartado usted puede consultar el estado del ticket.😊</p>
                         <a href="{{ url('/seguimiento') }}" class="btn-theme">Consultar</a>
                     </div>
                 </div>
@@ -31,7 +30,7 @@
                     <div class="info-box">
                         <div class="icon"><i class="fa-solid fa-file-export"></i></div>
                         <h2>Admin</h2>
-                        <p>Aquí puede generar los reportes y consultar datos Administrativos</p>
+                        <p>Vista de admin, aún en desarrollo</p>
                         <a href="{{ url('/admin-view') }}" class="btn-theme">Ver Información</a>
                     </div>
                 </div>
@@ -90,10 +89,10 @@
                     </div>
                 </div>
             </div>
-        @endauth
+    @endauth
 
-        @guest
-            <h1>Home</h1>
-            <p>Para ver el contenido <a href="/login">Inicia sesión</a></p>
-        @endguest
-    @endsection
+    @guest
+        <h1>Home</h1>
+        <p>Para ver el contenido <a href="/login">Inicia sesión</a></p>
+    @endguest
+@endsection

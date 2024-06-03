@@ -26,7 +26,7 @@ return new class extends Migration
             $table->timestamp('updated_at')->nullable();
             $table->unsignedBigInteger('user_department_id');
             $table->foreign('user_department_id')->references('id')->on('user_department');
-            $table->unsignedBigInteger('user_status_id')->default(1); // Asume que 1 es el ID del estado "activo"
+            $table->unsignedBigInteger('user_status_id')->default(1); // Registra el ID 1 que es el estado "activo".
             $table->foreign('user_status_id')->references('id')->on('user_status');
         });
     }
@@ -35,6 +35,7 @@ return new class extends Migration
      *
      * @return void
      */
+    
     public function down()
     {
         Schema::dropIfExists('users');
