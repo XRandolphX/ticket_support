@@ -9,9 +9,17 @@ class AdminViewController extends Controller
 {
     public function index()
     {
-        // return view('admin-view');
         // variable que obtendrá los datos de la consulta
-        $datos = DB::select(' select * from tickets ');
-        return view('admin-view')->with('datos', $datos,);
+        $datos_ticket = DB::select(' 
+        SELECT tickets.*, users.username, ticket_priority.ticket_priority_name, ticket_status.ticket_status_name
+        FROM tickets
+        INNER JOIN users ON tickets.user_id = users.id
+        INNER JOIN ticket_priority ON tickets.ticket_priority_id = ticket_priority.id
+        INNER JOIN ticket_status ON tickets.ticket_status_id = ticket_status.id
+        ');
+
+        return view('admin-view')->with('datos_ticket', $datos_ticket);
+
+        // $datos_ticket = DB::select(' select * from tickets.*, ');
     }
 }

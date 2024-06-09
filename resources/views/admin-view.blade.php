@@ -11,6 +11,7 @@
 
 <body>
     <h1>Vista Administrador</h1>
+    <div><a href="/word-export" class="btn btn-primary">Exportar a Word</a></div>
     {{-- Tabla donde se mostrarán los datos de los Tickets y Usuarios --}}
     <div class="p-4 table-responsive">
         <table class="table table-striped table-bordered table-hover">
@@ -28,14 +29,14 @@
                 </tr>
             </thead>
             <tbody class="table-group-divider">
-                @foreach ($datos as $item)
+                @foreach ($datos_ticket as $item)
                     <tr>
                         <th>{{ $item->id }}</th>
                         <td>{{ $item->subject }}</td>
                         <td>{{ $item->description }}</td>
-                        <td>{{ $item->user_id }}</td>
-                        <td>{{ $item->ticket_status_id }}</td>
-                        <td>{{ $item->ticket_priority_id }}</td>
+                        <td>{{ $item->username }}</td>
+                        <td>{{ $item->ticket_status_name }}</td>
+                        <td>{{ $item->ticket_priority_name }}</td>
                         <td>{{ $item->created_at }}</td>
                         <td>{{ $item->updated_at }}</td>
                         <td>
@@ -43,7 +44,6 @@
                                 class="btn btn-warning btn-sm"><i class="fa-solid fa-pen-to-square"></i></a>
                             <a href="" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i></a>
                         </td>
-
                         <!-- Modal Modificar Datos-->
                         <div class="modal fade" id="modalEditar" tabindex="-1" aria-labelledby="exampleModalLabel"
                             aria-hidden="true">

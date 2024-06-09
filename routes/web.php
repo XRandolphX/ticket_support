@@ -50,7 +50,11 @@ Route::get('/tickets', [TicketController::class, 'show']);
 Route::post('/registrar-tickets', [TicketController::class, 'store'])->name('registrar-tickets');
 
 // Seguimiento
-Route::get('/seguimiento', [SeguimientoController::class, 'index']);
+Route::get('/seguimiento', [SeguimientoController::class, 'show']);
 
 // Admin
 Route::get('/admin-view', [AdminViewController::class, 'index']);
+
+
+// Para crear el documento Word
+Route::get('/word-export', [TicketController::class, 'wordExport']);

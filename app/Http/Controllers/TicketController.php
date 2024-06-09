@@ -10,6 +10,8 @@ use App\Models\Ticket;
 use App\Models\TicketModel;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+// Librería para exportar a word
+use PhpOffice\PhpWord\PhpWord;
 
 class TicketController extends Controller
 {
@@ -67,6 +69,84 @@ class TicketController extends Controller
             return back()->with('error', 'Hubo un problema al registrar el ticket.');
         }
     }
+
+    public function wordExport()
+    {
+        // Se crea un nuevo documento de Word
+        $word = new PhpWord();
+        // Se agrega una sección en el documento Word
+        $section = $word->addSection();
+
+        // Estilo de la tabla
+        $tableStyle = array(
+            'borderColor' => '006699',
+            'borderSize'  => 6,
+            'cellMargin'  => 50,
+            'layout' => \PhpOffice\PhpWord\Style\Table::LAYOUT_FIXED
+        );
+
+        // Estilo de la primera fila
+        $firstRowStyle = array(
+            'bgColor' => '005599',
+        );
+
+        // Estilo del texto de la primera fila
+        $firstRowFontStyle = array('bold' => true, 'color' => 'FFFFFF', 'size' => 12);
+
+        // Estilo de las celdas de la primera fila
+        $firstRowCellStyle = array('valign' => 'center');
+
+        // Estilo del texto de las celdas
+        $cellFontStyle = array('size' => 10);
+
+        // Agregar el estilo de la tabla al documento
+        $word->addTableStyle('myTable', $tableStyle, $firstRowStyle);
+        //  Agregar la tabla al documento
+        $table = $section->addTable('myTable');
+
+        // Agregar la primera fila
+        $table->addRow();
+        $table->addCell(2000, $firstRowCellStyle)->addText('#Ticket ID', $firstRowFontStyle);
+        $table->addCell(2000, $firstRowCellStyle)->addText('Asunto', $firstRowFontStyle);
+        $table->addCell(2000, $firstRowCellStyle)->addText('Descripción', $firstRowFontStyle);
+        $table->addCell(2000, $firstRowCellStyle)->addText('Nombre de usuario', $firstRowFontStyle);
+        $table->addCell(2000, $firstRowCellStyle)->addText('Estado', $firstRowFontStyle);
+        $table->addCell(2000, $firstRowCellStyle)->addText('Prioridad', $firstRowFontStyle);
+        $table->addCell(2000, $firstRowCellStyle)->addText('Creado', $firstRowFontStyle);
+        $table->addCell(2000, $firstRowCellStyle)->addText('Actualizado', $firstRowFontStyle);
+
+        // variable que obtendrá los datos de la consulta
+        $datos_ticket = DB::select(' 
+                SELECT tickets.*, users.username, ticket_priority.ticket_priority_name, ticket_status.ticket_status_name
+                FROM tickets
+                INNER JOIN users ON tickets.user_id = users.id
+                INNER JOIN ticket_priority ON tickets.ticket_priority_id = ticket_priority.id
+                INNER JOIN ticket_status ON tickets.ticket_status_id = ticket_status.id
+                ');
+
+        // Agregar las filas y celdas
+        foreach ($datos_ticket as $item) {
+            $table->addRow();
+            $table->addCell(2000)->addText($item->id, $cellFontStyle);
+            $table->addCell(2000)->addText($item->subject, $cellFontStyle);
+            $table->addCell(2000)->addText($item->description, $cellFontStyle);
+            $table->addCell(2000)->addText($item->username, $cellFontStyle);
+            $table->addCell(2000)->addText($item->ticket_status_name, $cellFontStyle);
+            $table->addCell(2000)->addText($item->ticket_priority_name, $cellFontStyle);
+            $table->addCell(2000)->addText($item->created_at, $cellFontStyle);
+            $table->addCell(2000)->addText($item->updated_at, $cellFontStyle);
+        }
+
+        $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($word, 'Word2007');
+        $objWriter->save('mi_documento.docx');
+
+        // Guardar el documento
+        return response()->download('mi_documento.docx');
+    }
+
+
+
+
 
     /**
      * Store a newly created resource in storage.
