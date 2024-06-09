@@ -1,15 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
+{{-- Acá estoy heredando del app-master Principal --}}
+@extends('layouts.app-master')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Vista Admin</title>
-    <link rel="stylesheet" href="{{ url('assets/css/bootstrap.min.css') }}">
-</head>
-
-<body>
+@section('content')
     <h1>Vista Administrador</h1>
     <div><a href="/word-export" class="btn btn-primary">Exportar a Word</a></div>
     {{-- Tabla donde se mostrarán los datos de los Tickets y Usuarios --}}
@@ -26,6 +18,7 @@
                     <th scope="col">Apellidos</th>
                     <th scope="col">Fecha de creación</th>
                     <th scope="col">Fecha de actualización</th>
+                    <th scope="col">Editar</th>
                 </tr>
             </thead>
             <tbody class="table-group-divider">
@@ -57,35 +50,41 @@
                                     </div>
                                     <div class="modal-body">
                                         <form>
-                                            <div class="mb-3">
-                                                <label for="exampleInputEmail1" class="form-label">Asunto</label>
-                                                <input type="text" class="form-control" id="exampleInputEmail1"
-                                                    aria-describedby="emailHelp" name="txtcodigo">
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="exampleInputEmail1" class="form-label">Descripción</label>
-                                                <input type="text" class="form-control" id="exampleInputEmail1"
-                                                    aria-describedby="emailHelp" name="txtcodigo">
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="exampleInputEmail1" class="form-label">Usuario</label>
-                                                <input type="text" class="form-control" id="exampleInputEmail1"
-                                                    aria-describedby="emailHelp" name="txtcodigo">
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="exampleInputEmail1" class="form-label">Estado</label>
-                                                <input type="text" class="form-control" id="exampleInputEmail1"
-                                                    aria-describedby="emailHelp" name="txtcodigo">
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="exampleInputEmail1" class="form-label">Prioridad</label>
-                                                <input type="text" class="form-control" id="exampleInputEmail1"
-                                                    aria-describedby="emailHelp" name="txtcodigo">
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary"
-                                                    data-bs-dismiss="modal">Cerrar</button>
-                                                <button type="submit" class="btn btn-primary">Modificar</button>
+                                            {{-- Dropdown Estado --}}
+                                            <div class="container">
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <div class="mb-3">
+                                                            <label for="prioridad" class="form-label">Prioridad</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col">
+                                                        {{-- Primer componente --}}
+                                                        <div class="mb-3">
+                                                            <select class="selectpicker" data-live-search="true"
+                                                                name="ticket_status_id" id="ticket_status_id">`
+                                                                <option selected disabled data-tokens="Action"
+                                                                    value="">Seleccionar Estado</option>
+                                                                @if (isset($datos_ticket_estado))
+                                                                    @foreach ($datos_ticket_estado as $item)
+                                                                        <option value={{ $item->id }}>
+                                                                            {{ $item->ticket_status_name }}</option>
+                                                                    @endforeach
+                                                                @endif
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <div class="mb-3">
+                                                            <label for="descripcion" class="form-label">Descripción</label>
+                                                            <textarea class="form-control" id="descripcion" name="description" rows="3" required></textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </form>
                                     </div>
@@ -95,8 +94,6 @@
                     </tr>
                 @endforeach
             </tbody>
-        </div>
-        </table>
-</body>
-
-</html>
+    </div>
+    </table>
+@endsection
