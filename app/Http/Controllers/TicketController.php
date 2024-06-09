@@ -91,7 +91,7 @@ class TicketController extends Controller
         );
 
         // Estilo del texto de la primera fila
-        $firstRowFontStyle = array('bold' => true, 'color' => 'FFFFFF', 'size' => 12);
+        $firstRowFontStyle = array('bold' => true, 'color' => 'FFFFFF', 'size' => 10);
 
         // Estilo de las celdas de la primera fila
         $firstRowCellStyle = array('valign' => 'center');
@@ -109,20 +109,25 @@ class TicketController extends Controller
         $table->addCell(2000, $firstRowCellStyle)->addText('#Ticket ID', $firstRowFontStyle);
         $table->addCell(2000, $firstRowCellStyle)->addText('Asunto', $firstRowFontStyle);
         $table->addCell(2000, $firstRowCellStyle)->addText('Descripción', $firstRowFontStyle);
-        $table->addCell(2000, $firstRowCellStyle)->addText('Nombre de usuario', $firstRowFontStyle);
-        $table->addCell(2000, $firstRowCellStyle)->addText('Estado', $firstRowFontStyle);
         $table->addCell(2000, $firstRowCellStyle)->addText('Prioridad', $firstRowFontStyle);
+        $table->addCell(2000, $firstRowCellStyle)->addText('Estado', $firstRowFontStyle);
+        $table->addCell(2000, $firstRowCellStyle)->addText('Nombres', $firstRowFontStyle);
+        $table->addCell(2000, $firstRowCellStyle)->addText('Apellidos', $firstRowFontStyle);
         $table->addCell(2000, $firstRowCellStyle)->addText('Creado', $firstRowFontStyle);
         $table->addCell(2000, $firstRowCellStyle)->addText('Actualizado', $firstRowFontStyle);
 
-        // variable que obtendrá los datos de la consulta
+        // Obtener el ID del usuario logueado
+        $userId = Auth::id();
+
+        // variable que obtendrá los datos de la consulta de la Tabla Ticket
         $datos_ticket = DB::select(' 
-                SELECT tickets.*, users.username, ticket_priority.ticket_priority_name, ticket_status.ticket_status_name
-                FROM tickets
-                INNER JOIN users ON tickets.user_id = users.id
-                INNER JOIN ticket_priority ON tickets.ticket_priority_id = ticket_priority.id
-                INNER JOIN ticket_status ON tickets.ticket_status_id = ticket_status.id
-                ');
+        SELECT tickets.*, users.first_name, users.last_name, ticket_priority.ticket_priority_name, ticket_status.ticket_status_name
+        FROM tickets
+        INNER JOIN users ON tickets.user_id = users.id
+        INNER JOIN ticket_priority ON tickets.ticket_priority_id = ticket_priority.id
+        INNER JOIN ticket_status ON tickets.ticket_status_id = ticket_status.id
+        WHERE tickets.user_id = ?
+        ', [$userId]);
 
         // Agregar las filas y celdas
         foreach ($datos_ticket as $item) {
@@ -130,9 +135,10 @@ class TicketController extends Controller
             $table->addCell(2000)->addText($item->id, $cellFontStyle);
             $table->addCell(2000)->addText($item->subject, $cellFontStyle);
             $table->addCell(2000)->addText($item->description, $cellFontStyle);
-            $table->addCell(2000)->addText($item->username, $cellFontStyle);
-            $table->addCell(2000)->addText($item->ticket_status_name, $cellFontStyle);
             $table->addCell(2000)->addText($item->ticket_priority_name, $cellFontStyle);
+            $table->addCell(2000)->addText($item->ticket_status_name, $cellFontStyle);
+            $table->addCell(2000)->addText($item->first_name, $cellFontStyle);
+            $table->addCell(2000)->addText($item->last_name, $cellFontStyle);
             $table->addCell(2000)->addText($item->created_at, $cellFontStyle);
             $table->addCell(2000)->addText($item->updated_at, $cellFontStyle);
         }

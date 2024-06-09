@@ -11,7 +11,7 @@ class AdminController extends Controller
     {
         // variable que obtendrá los datos de la consulta
         $datos_ticket = DB::select(' 
-        SELECT tickets.*, users.username, ticket_priority.ticket_priority_name, ticket_status.ticket_status_name
+        SELECT tickets.*, users.first_name, users.last_name, ticket_priority.ticket_priority_name, ticket_status.ticket_status_name
         FROM tickets
         INNER JOIN users ON tickets.user_id = users.id
         INNER JOIN ticket_priority ON tickets.ticket_priority_id = ticket_priority.id

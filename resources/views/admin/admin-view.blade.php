@@ -20,12 +20,12 @@
                     <th scope="col">#Ticket ID</th>
                     <th scope="col">Asunto</th>
                     <th scope="col">Descripción</th>
-                    <th scope="col">Usuario</th>
-                    <th scope="col">Estado</th>
                     <th scope="col">Prioridad</th>
+                    <th scope="col">Estado</th>
+                    <th scope="col">Nombres</th>
+                    <th scope="col">Apellidos</th>
                     <th scope="col">Fecha de creación</th>
                     <th scope="col">Fecha de actualización</th>
-                    <th scope="col">Editar</th>
                 </tr>
             </thead>
             <tbody class="table-group-divider">
@@ -34,9 +34,10 @@
                         <th>{{ $item->id }}</th>
                         <td>{{ $item->subject }}</td>
                         <td>{{ $item->description }}</td>
-                        <td>{{ $item->username }}</td>
-                        <td>{{ $item->ticket_status_name }}</td>
                         <td>{{ $item->ticket_priority_name }}</td>
+                        <td>{{ $item->ticket_status_name }}</td>
+                        <td>{{ $item->first_name }}</td>
+                        <td>{{ $item->last_name }}</td>
                         <td>{{ $item->created_at }}</td>
                         <td>{{ $item->updated_at }}</td>
                         <td>
