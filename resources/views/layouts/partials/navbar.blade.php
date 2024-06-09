@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg">
     <div class="container-fluid justify-content-center">
-        <a class="navbar-brand" href="#">Ugel Sullana</a>
+        <a class="navbar-brand" href="/home">Ugel Sullana</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -9,13 +9,13 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <!-- Elementos de navegación -->
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    <a class="nav-link active" aria-current="page" href="/home">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Seguimiento</a>
+                    <a class="nav-link" href="/seguimiento">Seguimiento</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Reporte</a>
+                    <a class="nav-link" href="/admin-view">Reporte</a>
                 </li>
                 {{-- <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"

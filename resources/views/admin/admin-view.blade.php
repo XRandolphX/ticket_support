@@ -25,7 +25,7 @@
                     <th scope="col">Prioridad</th>
                     <th scope="col">Fecha de creación</th>
                     <th scope="col">Fecha de actualización</th>
-                    <th></th>
+                    <th scope="col">Editar</th>
                 </tr>
             </thead>
             <tbody class="table-group-divider">
@@ -94,8 +94,8 @@
                     </tr>
                 @endforeach
             </tbody>
+        </div>
         </table>
-    </div>
 </body>
 
 </html>

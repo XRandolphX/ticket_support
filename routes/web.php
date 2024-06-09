@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\AdminViewController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\HomeController;
@@ -49,12 +49,11 @@ Route::post(
 Route::get('/tickets', [TicketController::class, 'show']);
 Route::post('/registrar-tickets', [TicketController::class, 'store'])->name('registrar-tickets');
 
-// Seguimiento
+// Seguimiento View
 Route::get('/seguimiento', [SeguimientoController::class, 'show']);
 
-// Admin
-Route::get('/admin-view', [AdminViewController::class, 'index']);
-
+// Admin View
+Route::get('/admin-view', [AdminController::class, 'index']);
 
 // Para crear el documento Word
 Route::get('/word-export', [TicketController::class, 'wordExport']);

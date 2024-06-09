@@ -25,8 +25,10 @@ class RegisterRequest extends FormRequest
     public function rules()
     {
         return [
+            'first_name' => 'required|regex:/^[\pL\s\-]+$/u',
+            'last_name' => 'required|regex:/^[\pL\s\-]+$/u',
             'email' => 'required|unique:users,email',
-            'username' => 'required|unique:users,username',
+            // 'username' => 'required|unique:users,username',
             'password' => 'required|min:8',
             'password_confirmation' => 'required|same:password',
             'user_department_id' => 'required|exists:user_department,id', // Asegúrate de que user_department_id esté validado

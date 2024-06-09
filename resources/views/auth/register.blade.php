@@ -14,16 +14,15 @@
                 <h1>Crear una Cuenta</h1>
 
                 <div class="form-floating mb-3">
-                    <input type="email" placeholder="name@example.com" name="email" class="form-control"
-                        id="exampleInputEmail1" aria-describedby="emailHelp">
-                    <label for="exampleInputEmail1" class="form-label">Dirección Email</label>
-                    <div id="emailHelp" class="form-text">No compartiremos su correo con nadie.</div>
+                    <input type="text" placeholder="Nombres" name="first_name" class="form-control"
+                        id="exampleInputPassword1">
+                    <label for="exampleInputPassword1" class="form-label">Nombres</label>
                 </div>
 
                 <div class="form-floating mb-3">
-                    <input type="text" placeholder="username" name="username" class="form-control"
+                    <input type="text" placeholder="Apellidos" name="last_name" class="form-control"
                         id="exampleInputPassword1">
-                    <label for="exampleInputPassword1" class="form-label">Nombre de Usuario</label>
+                    <label for="exampleInputPassword1" class="form-label">Apellidos</label>
                 </div>
 
                 <div class="form-floating mb-3">
@@ -34,6 +33,14 @@
                         @endforeach
                     </select>
                 </div>
+
+                <div class="form-floating mb-3">
+                    <input type="email" placeholder="name@example.com" name="email" class="form-control"
+                        id="exampleInputEmail1" aria-describedby="emailHelp">
+                    <label for="exampleInputEmail1" class="form-label">Dirección Email</label>
+                    {{-- <div id="emailHelp" class="form-text">No compartiremos su correo con nadie.</div> --}}
+                </div>
+
 
                 <div class="form-floating mb-3">
                     <input type="password" placeholder="password" name="password" class="form-control"

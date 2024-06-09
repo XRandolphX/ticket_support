@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class AdminViewController extends Controller
+class AdminController extends Controller
 {
     public function index()
     {
@@ -18,7 +18,7 @@ class AdminViewController extends Controller
         INNER JOIN ticket_status ON tickets.ticket_status_id = ticket_status.id
         ');
 
-        return view('admin-view')->with('datos_ticket', $datos_ticket);
+        return view('admin.admin-view')->with('datos_ticket', $datos_ticket);
 
         // $datos_ticket = DB::select(' select * from tickets.*, ');
     }

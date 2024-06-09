@@ -15,9 +15,10 @@ class UserModel extends Authenticatable
     protected $table = 'users';
     // Campos que serán asignados de manera masiva.
     protected $fillable = [
-        'name',
+        'first_name',
+        'last_name',
         'email',
-        'username',
+        // 'username',
         'password',
         'user_department_id',
         'user_status_id',

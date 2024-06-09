@@ -6,7 +6,7 @@
         <h1 class="text-center p-3">Crear Ticket de Mantenimiento</h1>
         {{-- Contenido --}}
         <div class="container">
-            <h4 class="alert-heading">¡Bienvenido, <strong>{{ auth()->user()->name ?? auth()->user()->username }}</strong>!</h4>
+            <h4 class="alert-heading">¡Bienvenido, <strong>{{ auth()->user()->first_name ?? auth()->user()->last_name }}</strong>!</h4>
             <p>Estás autenticado en la página.</p>
             <h3 class="text-center p-3 display-6">Opciones</h3>
             <div class="row">
@@ -89,10 +89,10 @@
                     </div>
                 </div>
             </div>
-    @endauth
+        @endauth
 
-    @guest
-        <h1>Home</h1>
-        <p>Para ver el contenido <a href="/login">Inicia sesión</a></p>
-    @endguest
-@endsection
+        @guest
+            <h1>Home</h1>
+            <p>Para ver el contenido <a href="/login">Inicia sesión</a></p>
+        @endguest
+    @endsection
