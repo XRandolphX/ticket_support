@@ -38,18 +38,17 @@ Route::post(
 // Cerrar Sesión
 Route::get('/logout', [LogoutController::class, 'logout']);
 
-// Routes de Registro de Usuario
+// Registro de Usuario
 Route::get('/register', [RegisterController::class, 'show']);
 Route::post(
     '/register',
     [RegisterController::class, 'register']
 );
 
-// CRUD TICKET
+// ROUTES TICKET
 Route::get('/tickets', [TicketController::class, 'show']);
 Route::post('/registrar-tickets', [TicketController::class, 'store'])->name('registrar-tickets');
-
-// Seguimiento View
+// ROUTE TRACK
 Route::get('/seguimiento', [SeguimientoController::class, 'show']);
 
 // Admin View

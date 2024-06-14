@@ -39,33 +39,28 @@ class TicketController extends Controller
         return view('ticket.ticket')->with('datos_prioridad', $datos_prioridad);
     }
 
-
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
+
     public function store(TicketRegisterRequest $request)
     {
-
         // Primero, validamos los datos del formulario
         $validated = $request->validated();
 
         // Luego, creamos una nueva instancia de TicketModel
         $ticket = new TicketModel($validated);
-        // dd($ticket);
 
         // Asignamos el user_id al usuario autenticado y el ticket_status_id a un valor predeterminado
         $ticket->user_id = auth()->id();
         $ticket->ticket_status_id = 1; // id predeterminado 1 ("Abierto")
 
-        // Intentamos guardar el ticket en la base de datos
+        // Guardar el ticket en la base de datos
         if ($ticket->save()) {
-            // El ticket se guardó correctamente
-            // Redirigir al usuario a una página de éxito
             return redirect('/seguimiento')->with('status', 'Ticket registrado con éxito!');
         } else {
-            // Hubo un problema al guardar el ticket
             return back()->with('error', 'Hubo un problema al registrar el ticket.');
         }
     }

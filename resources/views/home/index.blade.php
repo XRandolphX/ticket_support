@@ -16,7 +16,7 @@
                     <div class="info-box">
                         <div class="icon"><i class="fa-solid fa-ticket"></i></div>
                         <h2>Crear Ticket de Soporte Técnico</h2>
-                        <p>Aquí puede crear su ticket de soporte técnico de manera fácil y rápida 😊</p>
+                        <p>Aquí puede crear su ticket de soporte técnico de manera fácil y rápida 😊.</p>
                         <button type="button" data-bs-toggle="modal" data-bs-target="#modalRegistrar">Crear Ticket</button>
                     </div>
                 </div>
@@ -24,7 +24,7 @@
                     <div class="info-box">
                         <div class="icon"><i class="fa-solid fa-eye"></i></div>
                         <h2>Consultar estado del Ticket</h2>
-                        <p>En este apartado usted puede consultar el estado del ticket.😊</p>
+                        <p>En este apartado usted puede consultar el estado de su ticket 😊.</p>
                         <a href="{{ url('/seguimiento') }}" class="btn-theme">Consultar</a>
                     </div>
                 </div>
@@ -32,7 +32,7 @@
                     <div class="info-box">
                         <div class="icon"><i class="fa-solid fa-file-export"></i></div>
                         <h2>Admin</h2>
-                        <p>Vista de admin, aún en desarrollo</p>
+                        <p>Se concede acceso y permisos para manipular la información.</p>
                         <a href="{{ url('/admin-view') }}" class="btn-theme">Ver Información</a>
                     </div>
                 </div>

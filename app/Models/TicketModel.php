@@ -20,8 +20,7 @@ class TicketModel extends Model
         'ticket_priority_id',
     ];
 
-    // Relaciones foráneas del Modelo Tickets con otras.
-
+    // RELACIONES FORÁNEAS DEL MODELO TICKETS CON OTRAS.
 
     // Uno a muchos - Del modelo Ticket al modelo User.
     public function ticket_user()
