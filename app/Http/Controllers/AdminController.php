@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\TicketModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
-    public function index()
+    public function show()
     {
         // variable que obtendrá los datos de la consulta
         $datos_ticket = DB::select(' 
@@ -20,8 +21,6 @@ class AdminController extends Controller
 
         $datos_ticket_estado = DB::table('ticket_status')->select('id', 'ticket_status_name')->get();
 
-        return view('admin.admin-view', ['datos_ticket' => $datos_ticket, 'datos_ticket_estado' => $datos_ticket_estado]);
-        // return view('admin.admin-view')->with('datos_ticket', $datos_ticket);
-
+        return view('admin.admin-view', ['datos_ticket' => $datos_ticket, 'datos_ticket_estado' => $datos_ticket_estado,]);
     }
 }

@@ -47,12 +47,14 @@ Route::post(
 
 // ROUTES TICKET
 Route::get('/tickets', [TicketController::class, 'show']);
+// Registrar
 Route::post('/registrar-tickets', [TicketController::class, 'store'])->name('registrar-tickets');
+// Actualizar
+Route::post('/actualizar-tickets', [TicketController::class, 'update'])->name('actualizar-tickets');
+
 // ROUTE TRACK
 Route::get('/seguimiento', [SeguimientoController::class, 'show']);
-
 // Admin View
-Route::get('/admin-view', [AdminController::class, 'index']);
-
+Route::get('/admin-view', [AdminController::class, 'show']);
 // Para crear el documento Word
 Route::get('/word-export', [TicketController::class, 'wordExport']);

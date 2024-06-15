@@ -45,6 +45,7 @@ class TicketController extends Controller
      * @return \Illuminate\Http\Response
      */
 
+    //  Registrar
     public function store(TicketRegisterRequest $request)
     {
         // Primero, validamos los datos del formulario
@@ -64,6 +65,23 @@ class TicketController extends Controller
             return back()->with('error', 'Hubo un problema al registrar el ticket.');
         }
     }
+
+    // Actualizar 
+    public function update(Request $request)
+    {
+        try {
+            $sql = DB::update('update tickets set ticket_status_id=?, updated_at=? where id=?', [$request->txt_ticket_status_id, now(), $request->id]);
+        } catch (\Throwable $th) {
+            $sql = 0;
+        }
+        if ($sql == true) {
+            return response()->json(['status' => 'correcto', 'message' => 'Ticket actualizado correctamente']);
+        } else {
+            return response()->json(['status' => 'incorrecto', 'message' => 'Error al actualizar'], 500);
+        }
+    }
+
+
 
     public function wordExport()
     {
@@ -186,10 +204,7 @@ class TicketController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        //
-    }
+
 
     /**
      * Remove the specified resource from storage.

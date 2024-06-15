@@ -22,78 +22,74 @@
                 </tr>
             </thead>
             <tbody class="table-group-divider">
-                @foreach ($datos_ticket as $item)
+                @foreach ($datos_ticket as $ticket)
                     <tr>
-                        <th>{{ $item->id }}</th>
-                        <td>{{ $item->subject }}</td>
-                        <td>{{ $item->description }}</td>
-                        <td>{{ $item->ticket_priority_name }}</td>
-                        <td>{{ $item->ticket_status_name }}</td>
-                        <td>{{ $item->first_name }}</td>
-                        <td>{{ $item->last_name }}</td>
-                        <td>{{ $item->created_at }}</td>
-                        <td>{{ $item->updated_at }}</td>
+                        <th>{{ $ticket->id }}</th>
+                        <td>{{ $ticket->subject }}</td>
+                        <td>{{ $ticket->description }}</td>
+                        <td>{{ $ticket->ticket_priority_name }}</td>
+                        <td>{{ $ticket->ticket_status_name }}</td>
+                        <td>{{ $ticket->first_name }}</td>
+                        <td>{{ $ticket->last_name }}</td>
+                        <td>{{ $ticket->created_at }}</td>
+                        <td>{{ $ticket->updated_at }}</td>
                         <td>
-                            <a href="" data-bs-toggle="modal" data-bs-target="#modalEditar"
-                                class="btn btn-warning btn-sm"><i class="fa-solid fa-pen-to-square"></i></a>
-                            <a href="" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i></a>
+                            <a href="#" data-id="{{ $ticket->id }}"
+                                data-status-id="{{ $ticket->ticket_status_id }}" class="btn btn-warning btn-sm btn-edit"><i
+                                    class="fa-solid fa-pen-to-square"></i></a>
+                            <a href="#" class="btn btn-danger btn-sm"><i class="fa-solid fa-trash"></i></a>
                         </td>
-                        <!-- Modal Modificar Datos-->
-                        <div class="modal fade" id="modalEditar" tabindex="-1" aria-labelledby="exampleModalLabel"
-                            aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Modificar Ticket</h1>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Modal Modificar Datos-->
+    <div class="modal fade" id="modalEditar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Modificar Ticket</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    {{-- FORM PARA ENVIAR LOS DATOS A ACTUALIZAR --}}
+                    <form id="formEditar" action="{{ route('actualizar-tickets') }}" method="POST">
+                        @csrf
+                        <input type="text" name="id" id="ticketId">
+                        {{-- Dropdown Estado --}}
+                        <div class="container">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="mb-3">
+                                        <label for="prioridad" class="form-label">Estado</label>
                                     </div>
-                                    <div class="modal-body">
-                                        <form>
-                                            {{-- Dropdown Estado --}}
-                                            <div class="container">
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <div class="mb-3">
-                                                            <label for="prioridad" class="form-label">Prioridad</label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col">
-                                                        {{-- Primer componente --}}
-                                                        <div class="mb-3">
-                                                            <select class="selectpicker" data-live-search="true"
-                                                                name="ticket_status_id" id="ticket_status_id">`
-                                                                <option selected disabled data-tokens="Action"
-                                                                    value="">Seleccionar Estado</option>
-                                                                @if (isset($datos_ticket_estado))
-                                                                    @foreach ($datos_ticket_estado as $item)
-                                                                        <option value={{ $item->id }}>
-                                                                            {{ $item->ticket_status_name }}</option>
-                                                                    @endforeach
-                                                                @endif
-                                                            </select>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <div class="mb-3">
-                                                            <label for="descripcion" class="form-label">Descripción</label>
-                                                            <textarea class="form-control" id="descripcion" name="description" rows="3" required></textarea>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </form>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    {{-- Primer componente --}}
+                                    <div class="mb-3">
+                                        <select class="selectpicker" data-live-search="true" name="txt_ticket_status_id"
+                                            id="txt_ticket_status_id">
+                                            <option selected disabled data-tokens="Action" value="">Seleccionar Estado
+                                            </option>
+                                            @if (isset($datos_ticket_estado))
+                                                @foreach ($datos_ticket_estado as $item)
+                                                    <option value="{{ $item->id }}">{{ $item->ticket_status_name }}
+                                                    </option>
+                                                @endforeach
+                                            @endif
+                                        </select>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </tr>
-                @endforeach
-            </tbody>
+                        <button type="submit">Actualizar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-    </table>
 @endsection
