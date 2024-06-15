@@ -1,10 +1,8 @@
-{{-- Acá estoy heredando del app-master Principal --}}
 @extends('layouts.app-master')
 
 @section('content')
     <h1>Vista Administrador</h1>
     <div><a href="/word-export" class="btn btn-primary">Exportar a Word</a></div>
-    {{-- Tabla donde se mostrarán los datos de los Tickets y Usuarios --}}
     <div class="p-4 table-responsive">
         <table class="table table-striped table-bordered table-hover">
             <thead class="bg-primary text-white">
@@ -23,16 +21,16 @@
             </thead>
             <tbody class="table-group-divider">
                 @foreach ($datos_ticket as $ticket)
-                    <tr>
+                    <tr id="ticket-{{ $ticket->id }}">
                         <th>{{ $ticket->id }}</th>
                         <td>{{ $ticket->subject }}</td>
                         <td>{{ $ticket->description }}</td>
                         <td>{{ $ticket->ticket_priority_name }}</td>
-                        <td>{{ $ticket->ticket_status_name }}</td>
+                        <td class="ticket-status">{{ $ticket->ticket_status_name }}</td>
                         <td>{{ $ticket->first_name }}</td>
                         <td>{{ $ticket->last_name }}</td>
                         <td>{{ $ticket->created_at }}</td>
-                        <td>{{ $ticket->updated_at }}</td>
+                        <td class="updated-at">{{ $ticket->updated_at }}</td>
                         <td>
                             <a href="#" data-id="{{ $ticket->id }}"
                                 data-status-id="{{ $ticket->ticket_status_id }}" class="btn btn-warning btn-sm btn-edit"><i
@@ -54,11 +52,9 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    {{-- FORM PARA ENVIAR LOS DATOS A ACTUALIZAR --}}
-                    <form id="formEditar" action="{{ route('actualizar-tickets') }}" method="POST">
+                    <form id="formEditar" method="POST">
                         @csrf
                         <input type="text" name="id" id="ticketId">
-                        {{-- Dropdown Estado --}}
                         <div class="container">
                             <div class="row">
                                 <div class="col">
@@ -69,7 +65,6 @@
                             </div>
                             <div class="row">
                                 <div class="col">
-                                    {{-- Primer componente --}}
                                     <div class="mb-3">
                                         <select class="selectpicker" data-live-search="true" name="txt_ticket_status_id"
                                             id="txt_ticket_status_id">
@@ -86,7 +81,7 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="submit">Actualizar</button>
+                        <button type="submit" id="btnSubmit">Actualizar</button>
                     </form>
                 </div>
             </div>
