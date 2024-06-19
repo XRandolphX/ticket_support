@@ -1,7 +1,29 @@
-{{-- Acá estoy heredando del app-master Principal --}}
-@extends('layouts.app-master')
+<!DOCTYPE html>
+<html lang="en">
 
-@section('content')
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    {{-- Bootstrap Archivo --}}
+    <link rel="stylesheet" href="{{ url('assets/css/bootstrap.min.css') }}">
+    {{-- CSS de la Interfaz Principal --}}
+    <link href="{{ asset('assets/css/ticket.css') }}" rel="stylesheet">
+</head>
+
+<body class="light-theme">
+    @include('layouts.partials.navbarh')
+
+    @guest
+        <div class="main-container">
+            <div class="info-box">
+                <h2>Bienvenido</h2>
+                <p>Para ver el contenido <a href="/login" class="btn-theme">Inicia sesión</a></p>
+            </div>
+        </div>
+    @endguest
+
     @auth
         <h1 class="text-center p-3">Crear Ticket de Mantenimiento</h1>
         {{-- Contenido --}}
@@ -17,7 +39,7 @@
                         <div class="icon"><i class="fa-solid fa-ticket"></i></div>
                         <h2>Crear Ticket de Soporte Técnico</h2>
                         <p>Aquí puede crear su ticket de soporte técnico de manera fácil y rápida 😊.</p>
-                        <button type="button" data-bs-toggle="modal" data-bs-target="#modalRegistrar">Crear Ticket</button>
+                        <button type="button" class="btn-theme" data-bs-toggle="modal" data-bs-target="#modalRegistrar">Crear Ticket</button>
                     </div>
                 </div>
                 <div class="col-12 col-sm-6 col-md-4">
@@ -38,10 +60,11 @@
                 </div>
             </div>
             <!-- Modal Registrar Datos -->
-            <div class="modal fade" id="modalRegistrar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="modalRegistrar" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
-                        <div class="modal-header">
+                        <div class="modal-header form-label">
                             <h5 class="modal-title" id="exampleModalLabel">Crear Nuevo Ticket</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
@@ -82,8 +105,9 @@
                                         <textarea class="form-control" id="descripcion" name="description" rows="3" required></textarea>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                                        <button type="submit" class="btn btn-primary">Registrar</button>
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Cerrar</button>
+                                        <button type="submit" class="btn btn-secondary">Registrar</button>
                                     </div>
                                 </form>
                             </div>
@@ -93,8 +117,18 @@
             </div>
         @endauth
 
-        @guest
-            <h1>Home</h1>
-            <p>Para ver el contenido <a href="/login">Inicia sesión</a></p>
-        @endguest
-@endsection
+
+        {{-- Bundle Bootstrap --}}
+        <script src="{{ url('assets/js/bootstrap.bundle.min.js') }}"></script>
+        <!-- Botón flotante Principal -->
+        <button class="floating-button" onclick="toggleTheme()"><i id="theme-icon"
+                class="fa-solid fa-moon"></i></button>
+
+        {{-- Iconos de FontAwesome --}}
+        <script src="https://kit.fontawesome.com/10363b534a.js" crossorigin="anonymous"></script>
+
+        <!-- JS de la Interfaz Principal - Cambiar Tema -->
+        <script src="assets/js/ticket.js"></script>
+</body>
+
+</html>

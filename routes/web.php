@@ -8,6 +8,9 @@ use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\SeguimientoController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TicketController;
+use App\Mail\MyTestEmail;
+use Illuminate\Support\Facades\Mail;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -58,3 +61,18 @@ Route::get('/seguimiento', [SeguimientoController::class, 'show']);
 Route::get('/admin-view', [AdminController::class, 'show']);
 // Para crear el documento Word
 Route::get('/word-export', [TicketController::class, 'wordExport']);
+
+Route::get('/pdf-export', [TicketController::class, 'pdfExport']);
+
+// Ruta para ver la tabla mediante QR
+Route::get('/table-qr', [TicketController::class, 'showTableQr'])->name('table.qr');
+
+// Ruta para ver la vista QR
+Route::get('/export-qr', [TicketController::class, 'generateQRCode'])->name('export.qr');
+
+// Rutas para el envío del email(don't work umu)
+Route::get('/testroute', function () {
+    $name = "Cómputo UGEL Sullana";
+    // El envío de correo electrónicose realiza utilizando el método to en la fachada del correo electrónico
+    Mail::to('randolphpeluche@gmail.com')->send(new MyTestEmail($name));
+});

@@ -10,8 +10,11 @@ use App\Models\Ticket;
 use App\Models\TicketModel;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 // Librería para exportar a word
 use PhpOffice\PhpWord\PhpWord;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use TCPDF;
 
 class TicketController extends Controller
 {
@@ -157,13 +160,144 @@ class TicketController extends Controller
         }
 
         $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($word, 'Word2007');
-        $objWriter->save('mi_documento.docx');
+        $objWriter->save('tickets.docx');
 
         // Guardar el documento
-        return response()->download('mi_documento.docx');
+        return response()->download('tickets.docx');
     }
 
 
+
+ 
+    public function pdfExport()
+    {
+        // Obtener el ID del usuario logueado
+        $userId = Auth::id();
+    
+        // Variable que obtendrá los datos de la consulta de la Tabla Ticket
+        $datos_ticket = DB::select(' 
+        SELECT tickets.*, users.first_name, users.last_name, ticket_priority.ticket_priority_name, ticket_status.ticket_status_name
+        FROM tickets
+        INNER JOIN users ON tickets.user_id = users.id
+        INNER JOIN ticket_priority ON tickets.ticket_priority_id = ticket_priority.id
+        INNER JOIN ticket_status ON tickets.ticket_status_id = ticket_status.id
+        WHERE tickets.user_id = ?
+        ', [$userId]);
+    
+        // Crear una nueva instancia de TCPDF
+        $pdf = new TCPDF();
+    
+        // Configurar el documento PDF
+        $pdf->SetCreator(PDF_CREATOR);
+        $pdf->SetAuthor('TuNombre');
+        $pdf->SetTitle('Tickets Report');
+        $pdf->SetSubject('Reporte de Tickets');
+        $pdf->SetKeywords('TCPDF, PDF, example, test, guide');
+    
+        // Agregar una página
+        $pdf->AddPage();
+    
+        // Título
+        $pdf->SetFont('helvetica', 'B', 12);
+        $pdf->Cell(0, 15, 'Reporte de Tickets', 0, 1, 'C');
+    
+        // Tabla
+        $pdf->SetFont('helvetica', '', 10);
+        $html = '<table border="1" cellpadding="4">
+                    <thead>
+                        <tr>
+                            <th>#Ticket ID</th>
+                            <th>Asunto</th>
+                            <th>Descripción</th>
+                            <th>Prioridad</th>
+                            <th>Estado</th>
+                            <th>Nombres</th>
+                            <th>Apellidos</th>
+                            <th>Creado</th>
+                            <th>Actualizado</th>
+                        </tr>
+                    </thead>
+                    <tbody>';
+    
+        // Agregar las filas y celdas
+        foreach ($datos_ticket as $item) {
+            $html .= '<tr>
+                        <td>' . $item->id . '</td>
+                        <td>' . $item->subject . '</td>
+                        <td>' . $item->description . '</td>
+                        <td>' . $item->ticket_priority_name . '</td>
+                        <td>' . $item->ticket_status_name . '</td>
+                        <td>' . $item->first_name . '</td>
+                        <td>' . $item->last_name . '</td>
+                        <td>' . $item->created_at . '</td>
+                        <td>' . $item->updated_at . '</td>
+                      </tr>';
+        }
+    
+        $html .= '</tbody></table>';
+    
+        // Output HTML content
+        $pdf->writeHTML($html, true, false, true, false, '');
+    
+        // Cerrar y generar el documento PDF
+        $pdf->lastPage();
+        $pdf->Output('tickets.pdf', 'D');
+    
+        // Guardar el documento
+        return response()->download('tickets.pdf');
+    }
+    
+    
+
+
+
+
+    public function showTableQr()
+    {
+        // Obtener el ID del usuario logueado
+        $userId = Auth::id();
+
+        // Obtener los datos de la tabla Ticket
+        $datos_ticket = DB::select(' 
+        SELECT tickets.*, users.first_name, users.last_name, ticket_priority.ticket_priority_name, ticket_status.ticket_status_name
+        FROM tickets
+        INNER JOIN users ON tickets.user_id = users.id
+        INNER JOIN ticket_priority ON tickets.ticket_priority_id = ticket_priority.id
+        INNER JOIN ticket_status ON tickets.ticket_status_id = ticket_status.id
+        WHERE tickets.user_id = ?
+        ', [$userId]);
+
+        return view('tabla_qr_view', compact('datos_ticket'));
+    }
+
+
+    // public function generateQRCode()
+    // {
+    //     try {
+    //         $url = route('export.qr');
+    //         $qr = QrCode::format('png')->size(300)->generate($url);
+
+    //         return response()->json(['qr' => base64_encode($qr)]);
+    //     } catch (\Exception $e) {
+    //         Log::error('Error generating QR code: ' . $e->getMessage() . ' in ' . $e->getFile() . ' on line ' . $e->getLine());
+    //         return response()->json(['error' => 'Error generating QR code'], 500);
+    //     }
+    // }
+
+
+
+    public function generateQRCode()
+    {
+        try {
+            $url = route('table.qr');
+            $qr = QrCode::size(300)->generate($url);
+
+            return view('qr_view', compact('qr', 'url'));
+        } catch (\Exception $e) {
+            Log::error('Error generating QR code: ' . $e->getMessage() . ' in ' . $e->getFile() . ' on line ' . $e->getLine());
+            return response()->json(['error' => 'Error generating QR code'], 500);
+        }
+    }
 
 
 

@@ -1,18 +1,10 @@
-<!DOCTYPE html>
-<html lang="es">
+@extends('layouts.app-master')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Consulta de Ticket</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-</head>
+@section('content')
 
-<body>
-    @include('layouts.partials.navbar')
-    <h1>Seguimiento del ticket</h1>
     {{-- Tabla donde se mostrarán los datos de los Tickets y Usuarios --}}
     <div class="p-4 table-responsive">
+        <h1>Seguimiento del ticket</h1>
         <table class="table table-striped table-bordered table-hover">
             <thead class="bg-primary text-white">
                 <tr>
@@ -44,7 +36,30 @@
             </tbody>
         </table>
         <div><a href="/word-export" class="btn btn-primary">Exportar a Word</a></div>
-    </div>
-</body>
+        <div class="mt-2"><a href="/export-qr" class="btn btn-primary">Exportar QR</a></div>
 
-</html>
+    </div>
+
+
+
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="qrModal" tabindex="-1" aria-labelledby="qrModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="qrModalLabel">Código QR</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <img id="qrImage" src="" alt="Código QR">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <a id="downloadLink" href="#" download="qr_code.png" class="btn btn-primary">Guardar QR</a>
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection

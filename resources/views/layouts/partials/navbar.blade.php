@@ -9,13 +9,13 @@
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <!-- Elementos de navegación -->
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/home">Home</a>
+                    <a class="nav-link" aria-current="page" href="/home">Home</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/seguimiento">Seguimiento</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/admin-view">Reporte</a>
+                    <a class="nav-link" href="/admin-view">Admin</a>
                 </li>
                 {{-- <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
@@ -41,9 +41,13 @@
                 <ul class="navbar-nav me-5 mb-2 mb-lg-0">
                     @auth
                         <li class="nav-item dropdown">
+                        
                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                                 aria-expanded="false">
-                                {{ auth()->user()->name ?? auth()->user()->username }}
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png"
+                                    alt="User" class="user-image"> <!-- Añade esta línea -->
+
+
                             </a>
                             <ul class="dropdown-menu">
                                 {{-- <li><a class="dropdown-item" href="#">Action</a></li>

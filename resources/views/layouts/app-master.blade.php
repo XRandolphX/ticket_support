@@ -32,11 +32,7 @@
     {{-- Iconos de FontAwesome --}}
     <script src="https://kit.fontawesome.com/10363b534a.js" crossorigin="anonymous"></script>
 
-    <!-- JS de la Interfaz Principal - Cambiar Tema -->
-    <script src="assets/js/ticket.js"></script>
 
-    <!-- Sweet Alert 2 -->
-    <script src="assets/js/sweet.js"></script>
 
     <!-- Botón flotante Principal -->
     <button class="floating-button" onclick="toggleTheme()"><i id="theme-icon" class="fa-solid fa-moon"></i></button>
@@ -48,6 +44,16 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.14.0-beta2/js/bootstrap-select.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- JS de la Interfaz Principal - Cambiar Tema -->
+    <script src="assets/js/ticket.js"></script>
+
+    <!-- Sweet Alert 2 -->
+    <script src="assets/js/sweet.js"></script>
+
+    <script src="assets/js/qr.js"></script>
+
+    {{-- @stack('scripts') --}}
 
 </body>
 

@@ -19,8 +19,15 @@ class AdminController extends Controller
         INNER JOIN ticket_status ON tickets.ticket_status_id = ticket_status.id
         ');
 
+        $datos_users = DB::select('
+        SELECT users.*, user_department.department, user_status.status_name
+        FROM users
+        INNER JOIN user_department ON users.user_department_id = user_department.id
+        INNER JOIN user_status ON users.user_status_id = user_status.id
+        ');
+
         $datos_ticket_estado = DB::table('ticket_status')->select('id', 'ticket_status_name')->get();
 
-        return view('admin.admin-view', ['datos_ticket' => $datos_ticket, 'datos_ticket_estado' => $datos_ticket_estado,]);
+        return view('admin.admin-view', ['datos_ticket' => $datos_ticket, 'datos_ticket_estado' => $datos_ticket_estado, 'datos_users' => $datos_users,]);
     }
 }
