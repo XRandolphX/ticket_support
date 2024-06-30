@@ -5,22 +5,23 @@ namespace App\Mail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
+use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class MyTestEmail extends Mailable
+class ContactanosMailable extends Mailable
 {
     use Queueable, SerializesModels;
-    public $name;
+
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($name)
+    public function __construct()
     {
-        $this->name = $name;
+        //
     }
 
     /**
@@ -31,7 +32,8 @@ class MyTestEmail extends Mailable
     public function envelope()
     {
         return new Envelope(
-            subject: 'My Test Email',
+            from: new Address('informatica@ugelsullana.com','Roberto Ocampo'),
+            subject: 'Información de contacto',
         );
     }
 
@@ -43,8 +45,7 @@ class MyTestEmail extends Mailable
     public function content()
     {
         return new Content(
-            view: 'mail.test-email',
-            with: ['name' => $this->name]
+            view: 'emails.contactanos',
         );
     }
 

@@ -8,6 +8,7 @@ use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\SeguimientoController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TicketController;
+use App\Mail\ContactanosMailable;
 use App\Mail\MyTestEmail;
 use Illuminate\Support\Facades\Mail;
 
@@ -71,8 +72,7 @@ Route::get('/table-qr', [TicketController::class, 'showTableQr'])->name('table.q
 Route::get('/export-qr', [TicketController::class, 'generateQRCode'])->name('export.qr');
 
 // Rutas para el envío del email(don't work umu)
-Route::get('/testroute', function () {
-    $name = "Cómputo UGEL Sullana";
-    // El envío de correo electrónicose realiza utilizando el método to en la fachada del correo electrónico
-    Mail::to('randolphpeluche@gmail.com')->send(new MyTestEmail($name));
-});
+Route::get('contactanos', function () {
+    Mail::to('informatica@ugelsullana.com')->send(new ContactanosMailable);
+    return "Mensaje Enviado";
+})->name('contactanos');

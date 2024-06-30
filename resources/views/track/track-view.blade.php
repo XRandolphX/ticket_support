@@ -2,6 +2,16 @@
 
 @section('content')
 
+@guest
+<div class="main-container">
+    <div class="info-box">
+        <h2>Bienvenido</h2>
+        <p>Para ver el contenido <a href="/login" class="btn-theme">Inicia sesión</a></p>
+    </div>
+</div>
+@endguest
+
+@auth
     {{-- Tabla donde se mostrarán los datos de los Tickets y Usuarios --}}
     <div class="p-4 table-responsive">
         <h1>Seguimiento del ticket</h1>
@@ -39,6 +49,8 @@
         <div class="mt-2"><a href="/export-qr" class="btn btn-primary">Exportar QR</a></div>
 
     </div>
+@endauth
+
 
 
 
