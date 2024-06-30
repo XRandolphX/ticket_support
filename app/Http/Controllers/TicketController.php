@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\TicketRegisterRequest;
+use App\Mail\ContactanosMailable;
 use Illuminate\Http\Request;
 // Se Cargan los modelos de las tablas que estamos uniendo
 use App\Models\State_Ticket;
@@ -11,6 +12,7 @@ use App\Models\TicketModel;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 // Librería para exportar a word
 use PhpOffice\PhpWord\PhpWord;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
@@ -53,11 +55,19 @@ class TicketController extends Controller
         $ticket->ticket_status_id = 1; // id predeterminado 1 ("Abierto")
 
         // Guardar el ticket en la base de datos
-        if ($ticket->save()) {
-            return redirect('/seguimiento')->with('status', 'Ticket registrado con éxito!');
-        } else {
-            return back()->with('error', 'Hubo un problema al registrar el ticket.');
-        }
+        $ticket->save();
+
+        // Enviar correo de notificación
+        Mail::to('informatica@ugelsullana.com')->send(new ContactanosMailable($ticket));
+
+        // Redirige con un mensaje de éxito
+        return redirect()->back()->with('success', 'Ticket registrado con éxito.');
+
+        // if ($ticket->save()) {
+        //     return redirect('/seguimiento')->with('status', 'Ticket registrado con éxito!');
+        // } else {
+        //     return back()->with('error', 'Hubo un problema al registrar el ticket.');
+        // }
     }
 
     // Actualizar 
@@ -74,6 +84,19 @@ class TicketController extends Controller
             return response()->json(['status' => 'incorrecto', 'message' => 'Error al actualizar'], 500);
         }
     }
+    //Eliminar
+    public function destroy($id)
+    {
+        try {
+            $ticket = TicketModel::findOrFail($id);
+            $ticket->delete();
+            return response()->json(['status' => 'correcto', 'message' => 'Ticket eliminado correctamente']);
+        } catch (\Throwable $th) {
+            return response()->json(['status' => 'incorrecto', 'message' => 'Error al eliminar el ticket'], 500);
+        }
+    }
+
+
 
     // Exportar el reporte en formato Word
     public function wordExport()
@@ -317,8 +340,4 @@ class TicketController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
-        //
-    }
 }

@@ -25,7 +25,7 @@ use Illuminate\Support\Facades\Mail;
 
 // Lo primero que se va a mostrar, en este caso es lo de laravel
 Route::get('/', function () {
-    return view('welcome');
+    return view('home/index');
 });
 
 // Navegar a la vista principal
@@ -55,6 +55,9 @@ Route::get('/tickets', [TicketController::class, 'show']);
 Route::post('/registrar-tickets', [TicketController::class, 'store'])->name('registrar-tickets');
 // Actualizar
 Route::post('/actualizar-tickets', [TicketController::class, 'update'])->name('actualizar-tickets');
+// Eliminar
+Route::delete('/eliminar-ticket/{id}', [TicketController::class, 'destroy'])->name('eliminar-ticket');
+
 
 // ROUTE TRACK
 Route::get('/seguimiento', [SeguimientoController::class, 'show']);

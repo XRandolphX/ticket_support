@@ -13,9 +13,6 @@
                                 {{ auth()->user()->name ?? auth()->user()->username }}
                             </a>
                             <ul class="dropdown-menu">
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
                                 <li><a class="dropdown-item" href="/logout">Logout</a></li>
                             </ul>
                         </li>

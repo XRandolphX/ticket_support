@@ -5,11 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Principal</title>
     {{-- Bootstrap Archivo --}}
     <link rel="stylesheet" href="{{ url('assets/css/bootstrap.min.css') }}">
     {{-- CSS de la Interfaz Principal --}}
     <link href="{{ asset('assets/css/ticket.css') }}" rel="stylesheet">
+    <!-- Incluye el script de SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body class="light-theme">
@@ -23,6 +25,18 @@
             </div>
         </div>
     @endguest
+
+    @if (session('success'))
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: '¡Éxito!',
+                text: '{{ session('success') }}',
+                showConfirmButton: true,
+                // timer: 3000
+            });
+        </script>
+    @endif
 
     @auth
         <h1 class="text-center p-3">Crear Ticket de Mantenimiento</h1>
@@ -39,7 +53,8 @@
                         <div class="icon"><i class="fa-solid fa-ticket"></i></div>
                         <h2>Crear Ticket de Soporte Técnico</h2>
                         <p>Aquí puede crear su ticket de soporte técnico de manera fácil y rápida 😊.</p>
-                        <button type="button" class="btn-theme" data-bs-toggle="modal" data-bs-target="#modalRegistrar">Crear Ticket</button>
+                        <button type="button" class="btn-theme" data-bs-toggle="modal"
+                            data-bs-target="#modalRegistrar">Crear Ticket</button>
                     </div>
                 </div>
                 <div class="col-12 col-sm-6 col-md-4">

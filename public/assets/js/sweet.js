@@ -1,3 +1,4 @@
+// EDITAR
 document.addEventListener("DOMContentLoaded", function () {
     document.querySelectorAll(".btn-edit").forEach(function (btn) {
         btn.addEventListener("click", function () {
@@ -74,3 +75,4 @@ if (formEditarElement) {
         });
     });
 }
+

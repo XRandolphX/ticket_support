@@ -13,6 +13,9 @@
     {{-- Agrega el plugin bootstrap-select (selectpicker) --}}
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.14.0-beta2/css/bootstrap-select.min.css">
+    <!-- Incluye el script de SweetAlert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
 </head>
 
@@ -43,7 +46,7 @@
     {{-- Script plugin bootstrap-select (selectpicker) --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.14.0-beta2/js/bootstrap-select.min.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 
     <!-- JS de la Interfaz Principal - Cambiar Tema -->
     <script src="assets/js/ticket.js"></script>
