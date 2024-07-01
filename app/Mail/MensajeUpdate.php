@@ -5,11 +5,12 @@ namespace App\Mail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
+use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class TicketRegistered extends Mailable
+class MensajeUpdate extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -31,7 +32,8 @@ class TicketRegistered extends Mailable
     public function envelope()
     {
         return new Envelope(
-            subject: 'Ticket Registered',
+            from: new Address('informatica@ugelsullana.com', 'Roberto Ocampo'),
+            subject: 'Información de contacto',
         );
     }
 
@@ -43,7 +45,7 @@ class TicketRegistered extends Mailable
     public function content()
     {
         return new Content(
-            view: 'view.name',
+            view: 'emails.updatemsj',
         );
     }
 

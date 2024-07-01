@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\TicketRegisterRequest;
 use App\Mail\ContactanosMailable;
+use App\Mail\MensajeUpdate;
 use Illuminate\Http\Request;
 // Se Cargan los modelos de las tablas que estamos uniendo
 use App\Models\State_Ticket;
@@ -79,6 +80,8 @@ class TicketController extends Controller
             $sql = 0;
         }
         if ($sql == true) {
+            // Enviar correo de notificación
+            Mail::to('informatica@ugelsullana.com')->send(new MensajeUpdate());
             return response()->json(['status' => 'correcto', 'message' => 'Ticket actualizado correctamente']);
         } else {
             return response()->json(['status' => 'incorrecto', 'message' => 'Error al actualizar'], 500);

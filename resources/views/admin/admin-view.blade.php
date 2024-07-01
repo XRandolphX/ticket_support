@@ -132,9 +132,9 @@
 
         </div>
         <script>
-            document.addEventListener('DOMContentLoaded', function () {
+            document.addEventListener('DOMContentLoaded', function() {
                 document.querySelectorAll('.btn-delete').forEach(button => {
-                    button.addEventListener('click', function () {
+                    button.addEventListener('click', function() {
                         const ticketId = this.getAttribute('data-id');
                         Swal.fire({
                             title: '¿Estás seguro?',
@@ -148,42 +148,43 @@
                         }).then((result) => {
                             if (result.isConfirmed) {
                                 fetch(`/eliminar-ticket/${ticketId}`, {
-                                    method: 'DELETE',
-                                    headers: {
-                                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                                    }
-                                })
-                                .then(response => response.json())
-                                .then(data => {
-                                    if (data.status === 'correcto') {
-                                        document.getElementById(`ticket-${ticketId}`).remove();
-                                        Swal.fire(
-                                            'Eliminado',
-                                            'El ticket ha sido eliminado.',
-                                            'success'
-                                        );
-                                    } else {
+                                        method: 'DELETE',
+                                        headers: {
+                                            'X-CSRF-TOKEN': document.querySelector(
+                                                'meta[name="csrf-token"]').getAttribute(
+                                                'content')
+                                        }
+                                    })
+                                    .then(response => response.json())
+                                    .then(data => {
+                                        if (data.status === 'correcto') {
+                                            document.getElementById(`ticket-${ticketId}`)
+                                                .remove();
+                                            Swal.fire(
+                                                'Eliminado',
+                                                'El ticket ha sido eliminado.',
+                                                'success'
+                                            );
+                                        } else {
+                                            Swal.fire(
+                                                'Error',
+                                                'Hubo un problema al eliminar el ticket.',
+                                                'error'
+                                            );
+                                        }
+                                    })
+                                    .catch(error => {
                                         Swal.fire(
                                             'Error',
                                             'Hubo un problema al eliminar el ticket.',
                                             'error'
                                         );
-                                    }
-                                })
-                                .catch(error => {
-                                    Swal.fire(
-                                        'Error',
-                                        'Hubo un problema al eliminar el ticket.',
-                                        'error'
-                                    );
-                                });
+                                    });
                             }
                         });
                     });
                 });
             });
-            </script>
-
-
+        </script>
     @endauth
 @endsection

@@ -9,8 +9,8 @@
 </head>
 
 <body>
-    <h1>Su Ticket ha sido registrado</h1>
-    <p>Estimado usuario su ticket ya está siendo atendido</p>
+    <h1>Su Ticket ha sido Actualizado</h1>
+    <p>Estimado usuario su ticket ha sido actualizado y está concluido</p>
 </body>
 
 </html>
