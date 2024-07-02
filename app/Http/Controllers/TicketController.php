@@ -3,12 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\TicketRegisterRequest;
-use App\Mail\ContactanosMailable;
-use App\Mail\MensajeUpdate;
+use App\Mail\MailSend;
+use App\Mail\MailUpdate;
 use Illuminate\Http\Request;
 // Se Cargan los modelos de las tablas que estamos uniendo
-use App\Models\State_Ticket;
-use App\Models\Ticket;
 use App\Models\TicketModel;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -59,7 +57,7 @@ class TicketController extends Controller
         $ticket->save();
 
         // Enviar correo de notificación
-        Mail::to('informatica@ugelsullana.com')->send(new ContactanosMailable($ticket));
+        Mail::to('informatica@ugelsullana.com')->send(new MailSend($ticket));
 
         // Redirige con un mensaje de éxito
         return redirect()->back()->with('success', 'Ticket registrado con éxito.');
@@ -81,7 +79,7 @@ class TicketController extends Controller
         }
         if ($sql == true) {
             // Enviar correo de notificación
-            Mail::to('informatica@ugelsullana.com')->send(new MensajeUpdate());
+            Mail::to('informatica@ugelsullana.com')->send(new MailUpdate());
             return response()->json(['status' => 'correcto', 'message' => 'Ticket actualizado correctamente']);
         } else {
             return response()->json(['status' => 'incorrecto', 'message' => 'Error al actualizar'], 500);
