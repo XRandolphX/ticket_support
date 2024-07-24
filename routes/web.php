@@ -79,3 +79,8 @@ Route::get('contactanos', function () {
     Mail::to('informatica@ugelsullana.com')->send(new MailSend);
     return "Mensaje Enviado";
 })->name('contactanos');
+
+//Ruta para buscar tickets
+Route::get('/tickets/search', [TicketController::class, 'search'])->name('tickets.search');
+
+

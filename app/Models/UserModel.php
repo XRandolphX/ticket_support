@@ -48,6 +48,6 @@ class UserModel extends Authenticatable
     // Uno a muchos - de este Modelo Usuario con el Modelo Ticket.
     public function ticket_user()
     {
-        return $this->hasMany(TicketModel::class);
+        return $this->hasMany(TicketModel::class, 'user_id');
     }
 }

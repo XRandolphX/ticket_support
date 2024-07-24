@@ -97,6 +97,34 @@ class TicketController extends Controller
         }
     }
 
+    //Método de buscar en tu Controlador
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+
+        // Obtener el ID del usuario logueado
+        $userId = Auth::id();
+
+        $datos_ticket = TicketModel::with(['ticket_user', 'ticket_status', 'ticket_priority'])
+            ->where('user_id', $userId) // Filtrar por usuario autenticado
+            ->where(function ($q) use ($query) {
+                $q->where('subject', 'like', "%$query%")
+                    ->orWhere('description', 'like', "%$query%")
+                    ->orWhereHas('ticket_user', function ($q) use ($query) {
+                        $q->where('first_name', 'like', "%$query%")
+                            ->orWhere('last_name', 'like', "%$query%");
+                    })
+                    ->orWhereHas('ticket_status', function ($q) use ($query) {
+                        $q->where('ticket_status_name', 'like', "%$query%");
+                    })
+                    ->orWhereHas('ticket_priority', function ($q) use ($query) {
+                        $q->where('ticket_priority_name', 'like', "%$query%");
+                    });
+            })
+            ->get();
+
+        return view('track/track-view', compact('datos_ticket'));
+    }
 
 
     // Exportar el reporte en formato Word

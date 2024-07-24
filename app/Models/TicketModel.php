@@ -25,18 +25,18 @@ class TicketModel extends Model
     // Uno a muchos - Del modelo Ticket al modelo User.
     public function ticket_user()
     {
-        return $this->belongsTo(UserModel::class);
+        return $this->belongsTo(UserModel::class, 'user_id');
     }
 
     // Uno a muchos - Del modelo Ticket al modelo Tickets Status.
     public function ticket_status()
     {
-        return $this->belongsTo(TicketStatusModel::class);
+        return $this->belongsTo(TicketStatusModel::class, 'ticket_status_id');
     }
 
     // Uno a muchos - Del modelo Ticket al modelo Tickets Priority.
     public function ticket_priority()
     {
-        return $this->belongsTo(TicketPriorityModel::class);
+        return $this->belongsTo(TicketPriorityModel::class, 'ticket_priority_id');
     }
 }

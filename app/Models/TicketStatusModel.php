@@ -10,11 +10,11 @@ class TicketStatusModel extends Model
 {
     use HasFactory;
 
-    // protected $table = 'ticket_status';
+    protected $table = 'ticket_status';
 
     protected $fillable = [
         'id',
-        'status_name',
+        'ticket_status_name',
     ];
 
     // Relaciones foráneas de la tabla Tickets Status con Ticket.

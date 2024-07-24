@@ -12,6 +12,14 @@
 @endguest
 
 @auth
+
+    {{-- Formulario de Búsqueda --}}
+    <div class="p-4">
+        <form action="{{ route('tickets.search') }}" method="GET" class="mb-4">
+            <input type="text" name="query" class="form-control" placeholder="Buscar...">
+        </form>
+    </div>
+
     {{-- Tabla donde se mostrarán los datos de los Tickets y Usuarios --}}
     <div class="p-4 table-responsive">
         <h1>Seguimiento del ticket</h1>
@@ -45,16 +53,11 @@
                 @endforeach
             </tbody>
         </table>
-        <div><a href="/word-export" class="btn btn-primary">Exportar a Word</a></div>
+        {{-- <div><a href="/word-export" class="btn btn-primary">Exportar a Word</a></div> --}}
         <div class="mt-2"><a href="/export-qr" class="btn btn-primary">Exportar QR</a></div>
 
     </div>
 @endauth
-
-
-
-
-
 
     <!-- Modal -->
     <div class="modal fade" id="qrModal" tabindex="-1" aria-labelledby="qrModalLabel" aria-hidden="true">
@@ -75,3 +78,7 @@
         </div>
     </div>
 @endsection
+
+
+
+

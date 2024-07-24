@@ -25,4 +25,7 @@ class SeguimientoController extends Controller
 
         return view('track.track-view')->with('datos_ticket', $datos_ticket);
     }
+
+
+    
 }

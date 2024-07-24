@@ -9,6 +9,8 @@ class TicketPriorityModel extends Model
 {
     use HasFactory;
 
+    protected $table = 'ticket_priority';
+
     protected $fillable = [
         'id',
         'ticket_priority_name',
